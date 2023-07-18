@@ -2,6 +2,7 @@
 using IdentityModel.OidcClient;
 using System;
 using System.Windows;
+using WpfOidcClient.ViewModels;
 
 namespace WpfOidcClient
 {
@@ -13,6 +14,8 @@ namespace WpfOidcClient
         public MainWindow()
         {
             InitializeComponent();
+
+            ViewModel = AppHost.GetRequiredService<IMainViewModel>();
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
