@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
 using TIKSN.DependencyInjection;
+using WpfOidcClient.ViewModels;
 
 namespace WpfOidcClient
 {
@@ -30,6 +31,8 @@ namespace WpfOidcClient
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddFrameworkPlatform();
+
+            ViewModelServices.RegisterServices(services);
         }
     }
 }
