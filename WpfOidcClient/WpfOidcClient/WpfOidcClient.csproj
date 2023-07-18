@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Fluent.Ribbon" Version="9.0.4" />
     <PackageReference Include="IdentityModel.OidcClient" Version="4.0.0-preview.8" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.774.44" />
     <PackageReference Include="TIKSN-Framework" Version="4.3.3" />
