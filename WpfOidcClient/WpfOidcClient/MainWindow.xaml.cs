@@ -1,4 +1,5 @@
-﻿using IdentityModel.OidcClient;
+﻿using IdentityModel.Client;
+using IdentityModel.OidcClient;
 using System;
 using System.Windows;
 
@@ -7,7 +8,7 @@ namespace WpfOidcClient
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
@@ -18,14 +19,20 @@ namespace WpfOidcClient
         {
             var options = new OidcClientOptions()
             {
-                Authority = "https://demo.duendesoftware.com/",
-                ClientId = "interactive.public",
-                Scope = "openid profile email",
+                Authority = "http://localhost:9011/",
+                ClientId = "",
+                ClientSecret = "",
+                Scope = "openid profile email offline_access",
                 RedirectUri = "http://127.0.0.1/sample-wpf-app",
                 Browser = new WpfEmbeddedBrowser(),
                 Policy = new Policy
                 {
-                    RequireIdentityTokenSignature = false
+                    RequireIdentityTokenSignature = false,
+                    ValidateTokenIssuerName = false,
+                    Discovery = new DiscoveryPolicy
+                    {
+                        ValidateIssuerName = false,
+                    }
                 }
             };
 
