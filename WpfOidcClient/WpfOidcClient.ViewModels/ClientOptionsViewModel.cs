@@ -6,6 +6,9 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
 {
     public ClientOptionsViewModel(IMessageBus messageBus) : base(messageBus)
     {
+        Authority = "http://localhost:9011/";
+        Scope = "openid profile email offline_access";
+        RedirectUrl = "http://127.0.0.1/sample-wpf-app";
     }
 
     #region Authority property
