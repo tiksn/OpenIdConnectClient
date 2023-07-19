@@ -21,9 +21,9 @@ public class CommandsViewModel : ViewModel, ICommandsViewModel
 
     #region Log In Command
 
-    public ReactiveCommand<Unit, LoginResult> LogInCommand { get; protected set; }
+    public ReactiveCommand<Unit, Unit> LogInCommand { get; protected set; }
 
-    private async Task<LoginResult> ExecuteLogInCommandAsync()
+    private async Task<Unit> ExecuteLogInCommandAsync()
     {
         var options = new OidcClientOptions()
         {
@@ -46,7 +46,16 @@ public class CommandsViewModel : ViewModel, ICommandsViewModel
 
         var _oidcClient = new OidcClient(options);
 
-        return await _oidcClient.LoginAsync();
+        try
+        {
+            LoginResult loginResult = await _oidcClient.LoginAsync();
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+        return Unit.Default;
     }
 
     #endregion Log In Command
