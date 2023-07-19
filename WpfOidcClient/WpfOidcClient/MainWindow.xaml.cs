@@ -14,6 +14,7 @@ namespace WpfOidcClient
             InitializeComponent();
 
             ViewModel = AppHost.GetRequiredService<IMainViewModel>();
+            DataContext = ViewModel;
 
             this.WhenActivated(disposableRegistration =>
             {
