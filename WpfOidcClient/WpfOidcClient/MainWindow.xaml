@@ -9,8 +9,8 @@
     Title="WPF OIDC Client"
     Width="1100"
     Height="650"
+    d:DataContext="{d:DesignInstance Type=vm:IMainViewModel}"
     x:TypeArguments="vm:IMainViewModel"
-    Loaded="Window_Loaded"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -120,11 +120,13 @@
                                 Width="100"
                                 Height="20"
                                 Margin="4"
+                                Command="{Binding Path=Commands.LogInCommand}"
                                 Content="Log In" />
                             <Button
                                 Width="100"
                                 Height="20"
                                 Margin="4"
+                                Command="{Binding Path=Commands.LogOutCommand}"
                                 Content="Log Out" />
                         </StackPanel>
                     </GroupBox>
