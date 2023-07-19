@@ -133,14 +133,5 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <TextBlock
-            x:Name="txbMessage"
-            Grid.Row="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontFamily="Segoe UI Light, San Serif"
-            FontSize="24"
-            Text="Signing In..."
-            TextWrapping="Wrap" />
     </Grid>
 </reactiveui:ReactiveWindow>
