@@ -14,7 +14,6 @@ namespace WpfOidcClient
             InitializeComponent();
 
             ViewModel = AppHost.GetRequiredService<IMainViewModel>();
-            DataContext = ViewModel;
 
             this.WhenActivated(disposableRegistration =>
             {
@@ -41,6 +40,16 @@ namespace WpfOidcClient
                 this.Bind(ViewModel,
                     viewModel => viewModel.ClientOptions.RedirectUrl,
                     view => view.redirectUrlTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.BindCommand(ViewModel,
+                    viewModel => viewModel.Commands.LogInCommand,
+                    view => view.logInButton)
+                    .DisposeWith(disposableRegistration);
+
+                this.BindCommand(ViewModel,
+                    viewModel => viewModel.Commands.LogOutCommand,
+                    view => view.logOutButton)
                     .DisposeWith(disposableRegistration);
             });
         }
