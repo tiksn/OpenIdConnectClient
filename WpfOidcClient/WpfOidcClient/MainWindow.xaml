@@ -43,6 +43,7 @@
 
                     <Label Margin="4" Content="Authority" />
                     <TextBox
+                        x:Name="authorityTextBox"
                         Grid.Column="1"
                         Margin="4"
                         VerticalContentAlignment="Center" />
@@ -52,6 +53,7 @@
                         Margin="4"
                         Content="Client ID" />
                     <TextBox
+                        x:Name="clientIdTextBox"
                         Grid.Row="1"
                         Grid.Column="1"
                         Margin="4"
@@ -62,6 +64,7 @@
                         Margin="4"
                         Content="Client Secret" />
                     <TextBox
+                        x:Name="clientSecretTextBox"
                         Grid.Row="2"
                         Grid.Column="1"
                         Margin="4"
@@ -72,6 +75,7 @@
                         Margin="4"
                         Content="Scope" />
                     <TextBox
+                        x:Name="scopeTextBox"
                         Grid.Row="3"
                         Grid.Column="1"
                         Margin="4"
@@ -82,6 +86,7 @@
                         Margin="4"
                         Content="Redirect URL" />
                     <TextBox
+                        x:Name="redirectUrlTextBox"
                         Grid.Row="4"
                         Grid.Column="1"
                         Margin="4"
