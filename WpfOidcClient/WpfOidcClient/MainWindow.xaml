@@ -14,8 +14,121 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Expander
+                Grid.Column="0"
+                Margin="4"
+                Header="Settings"
+                IsExpanded="True">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Margin="4" Content="Authority" />
+                    <TextBox
+                        Grid.Column="1"
+                        Margin="4"
+                        VerticalContentAlignment="Center" />
+
+                    <Label
+                        Grid.Row="1"
+                        Margin="4"
+                        Content="Client ID" />
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="4"
+                        VerticalContentAlignment="Center" />
+
+                    <Label
+                        Grid.Row="2"
+                        Margin="4"
+                        Content="Client Secret" />
+                    <TextBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="4"
+                        VerticalContentAlignment="Center" />
+
+                    <Label
+                        Grid.Row="3"
+                        Margin="4"
+                        Content="Scope" />
+                    <TextBox
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="4"
+                        VerticalContentAlignment="Center" />
+
+                    <Label
+                        Grid.Row="4"
+                        Margin="4"
+                        Content="Redirect URL" />
+                    <TextBox
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="4"
+                        VerticalContentAlignment="Center" />
+                </Grid>
+            </Expander>
+            <StackPanel
+                Grid.Column="1"
+                Margin="4"
+                Orientation="Horizontal">
+                <StackPanel>
+                    <GroupBox Margin="4" Header="Refresh">
+                        <StackPanel>
+                            <Button
+                                Width="100"
+                                Height="20"
+                                Margin="4"
+                                Content="Refresh" />
+                            <CheckBox
+                                Width="100"
+                                Height="20"
+                                Margin="4"
+                                Content="Auto Refresh" />
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+                <StackPanel>
+                    <GroupBox Margin="4" Header="In and Out">
+                        <StackPanel>
+                            <Button
+                                Width="100"
+                                Height="20"
+                                Margin="4"
+                                Content="Log In" />
+                            <Button
+                                Width="100"
+                                Height="20"
+                                Margin="4"
+                                Content="Log Out" />
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
         <TextBlock
             x:Name="txbMessage"
+            Grid.Row="1"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontFamily="Segoe UI Light, San Serif"
