@@ -8,5 +8,6 @@ public static class ViewModelServices
     {
         services.AddSingleton<IMainViewModel, MainViewModel>();
         services.AddSingleton<IClientOptionsViewModel, ClientOptionsViewModel>();
+        services.AddSingleton<ICommandsViewModel, CommandsViewModel>();
     }
 }

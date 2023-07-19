@@ -9,8 +9,8 @@
     Title="WPF OIDC Client"
     Width="1100"
     Height="650"
+    d:DataContext="{d:DesignInstance Type=vm:IMainViewModel}"
     x:TypeArguments="vm:IMainViewModel"
-    Loaded="Window_Loaded"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -117,28 +117,23 @@
                     <GroupBox Margin="4" Header="In and Out">
                         <StackPanel>
                             <Button
+                                x:Name="logInButton"
                                 Width="100"
                                 Height="20"
                                 Margin="4"
+                                Command="{Binding Path=Commands.LogInCommand}"
                                 Content="Log In" />
                             <Button
+                                x:Name="logOutButton"
                                 Width="100"
                                 Height="20"
                                 Margin="4"
+                                Command="{Binding Path=Commands.LogOutCommand}"
                                 Content="Log Out" />
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <TextBlock
-            x:Name="txbMessage"
-            Grid.Row="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontFamily="Segoe UI Light, San Serif"
-            FontSize="24"
-            Text="Signing In..."
-            TextWrapping="Wrap" />
     </Grid>
 </reactiveui:ReactiveWindow>
