@@ -6,7 +6,7 @@ namespace WpfOidcClient.ViewModels;
 
 public interface ICommandsViewModel
 {
-    ReactiveCommand<Unit, LoginResult> LogInCommand { get; }
+    ReactiveCommand<Unit, Unit> LogInCommand { get; }
 
     ReactiveCommand<Unit, Unit> LogOutCommand { get; }
 }
