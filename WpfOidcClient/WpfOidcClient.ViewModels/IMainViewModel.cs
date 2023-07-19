@@ -1,6 +1,6 @@
-﻿namespace WpfOidcClient.ViewModels
+﻿namespace WpfOidcClient.ViewModels;
+
+public interface IMainViewModel
 {
-    public interface IMainViewModel
-    {
-    }
+    IClientOptionsViewModel ClientOptions { get; }
 }

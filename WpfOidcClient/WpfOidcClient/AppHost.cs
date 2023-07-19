@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using IdentityModel.OidcClient.Browser;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
@@ -31,6 +32,7 @@ namespace WpfOidcClient
         private static void RegisterServices(IServiceCollection services)
         {
             services.AddFrameworkPlatform();
+            services.AddSingleton<IBrowser, WpfEmbeddedBrowser>();
 
             ViewModelServices.RegisterServices(services);
         }

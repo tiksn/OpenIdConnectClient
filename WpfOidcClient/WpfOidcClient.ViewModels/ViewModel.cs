@@ -1,14 +1,13 @@
 ﻿using ReactiveUI;
 
-namespace WpfOidcClient.ViewModels
-{
-    public abstract class ViewModel : ReactiveObject
-    {
-        protected readonly IMessageBus messageBus;
+namespace WpfOidcClient.ViewModels;
 
-        protected ViewModel(IMessageBus messageBus)
-        {
-            this.messageBus = messageBus ?? throw new ArgumentNullException(nameof(messageBus));
-        }
+public abstract class ViewModel : ReactiveObject
+{
+    protected readonly IMessageBus messageBus;
+
+    protected ViewModel(IMessageBus messageBus)
+    {
+        this.messageBus = messageBus ?? throw new ArgumentNullException(nameof(messageBus));
     }
 }

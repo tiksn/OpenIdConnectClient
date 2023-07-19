@@ -1,6 +1,8 @@
 ﻿using IdentityModel.Client;
 using IdentityModel.OidcClient;
+using ReactiveUI;
 using System;
+using System.Reactive.Disposables;
 using System.Windows;
 using WpfOidcClient.ViewModels;
 
@@ -16,6 +18,34 @@ namespace WpfOidcClient
             InitializeComponent();
 
             ViewModel = AppHost.GetRequiredService<IMainViewModel>();
+
+            this.WhenActivated(disposableRegistration =>
+            {
+                this.Bind(ViewModel,
+                    viewModel => viewModel.ClientOptions.Authority,
+                    view => view.authorityTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.Bind(ViewModel,
+                    viewModel => viewModel.ClientOptions.ClientId,
+                    view => view.clientIdTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.Bind(ViewModel,
+                    viewModel => viewModel.ClientOptions.ClientSecret,
+                    view => view.clientSecretTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.Bind(ViewModel,
+                    viewModel => viewModel.ClientOptions.Scope,
+                    view => view.scopeTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.Bind(ViewModel,
+                    viewModel => viewModel.ClientOptions.RedirectUrl,
+                    view => view.redirectUrlTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+            });
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
