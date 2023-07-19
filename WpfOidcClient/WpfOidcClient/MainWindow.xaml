@@ -117,12 +117,14 @@
                     <GroupBox Margin="4" Header="In and Out">
                         <StackPanel>
                             <Button
+                                x:Name="logInButton"
                                 Width="100"
                                 Height="20"
                                 Margin="4"
                                 Command="{Binding Path=Commands.LogInCommand}"
                                 Content="Log In" />
                             <Button
+                                x:Name="logOutButton"
                                 Width="100"
                                 Height="20"
                                 Margin="4"
