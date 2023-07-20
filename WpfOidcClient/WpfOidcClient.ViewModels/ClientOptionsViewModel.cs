@@ -1,14 +1,56 @@
-﻿using ReactiveUI;
+﻿using IdentityModel.OidcClient;
+using ReactiveUI;
+using System.Reactive;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 
 namespace WpfOidcClient.ViewModels;
 
 public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
 {
-    public ClientOptionsViewModel(IMessageBus messageBus) : base(messageBus)
+    public ClientOptionsViewModel(
+        OidcClientOptions ovoidClientOptions,
+        IMessageBus messageBus) : base(messageBus)
     {
         Authority = "http://localhost:9011/";
         Scope = "openid profile email offline_access";
         RedirectUrl = "http://127.0.0.1/sample-wpf-app";
+
+        oidcClientOptions = ovoidClientOptions ?? throw new ArgumentNullException(nameof(ovoidClientOptions));
+
+        UpdateClientOptions();
+
+        this.WhenAnyValue(x => x.Authority)
+            .Select(_ => UpdateClientOptions())
+            .Subscribe();
+
+        this.WhenAnyValue(x => x.ClientId)
+            .Select(_ => UpdateClientOptions())
+            .Subscribe();
+
+        this.WhenAnyValue(x => x.ClientSecret)
+            .Select(_ => UpdateClientOptions())
+            .Subscribe();
+
+        this.WhenAnyValue(x => x.RedirectUrl)
+            .Select(_ => UpdateClientOptions())
+            .Subscribe();
+
+        this.WhenAnyValue(x => x.Scope)
+            .Select(_ => UpdateClientOptions())
+            .Subscribe();
+    }
+
+    private Unit UpdateClientOptions()
+    {
+        oidcClientOptions.Authority = Authority;
+        oidcClientOptions.Policy.Discovery.Authority = Authority;
+        oidcClientOptions.ClientId = ClientId;
+        oidcClientOptions.ClientSecret = ClientSecret;
+        oidcClientOptions.RedirectUri = RedirectUrl;
+        oidcClientOptions.Scope = Scope;
+
+        return Unit.Default;
     }
 
     #region Authority property
@@ -62,6 +104,7 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
     #region Scope property
 
     private string _scope;
+    private readonly OidcClientOptions oidcClientOptions;
 
     public string Scope
     {
