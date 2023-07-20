@@ -1,4 +1,6 @@
-﻿using IdentityModel.OidcClient.Browser;
+﻿using IdentityModel.Client;
+using IdentityModel.OidcClient;
+using IdentityModel.OidcClient.Browser;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -33,6 +35,19 @@ namespace WpfOidcClient
         {
             services.AddFrameworkPlatform();
             services.AddSingleton<IBrowser, WpfEmbeddedBrowser>();
+
+            services.AddSingleton(new OidcClientOptions()
+            {
+                Policy = new Policy
+                {
+                    RequireIdentityTokenSignature = false,
+                    ValidateTokenIssuerName = false,
+                    Discovery = new DiscoveryPolicy
+                    {
+                        ValidateIssuerName = false,
+                    },
+                },
+            });
 
             ViewModelServices.RegisterServices(services);
         }

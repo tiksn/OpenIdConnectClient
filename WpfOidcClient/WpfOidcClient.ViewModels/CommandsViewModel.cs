@@ -1,5 +1,4 @@
-﻿using IdentityModel.Client;
-using IdentityModel.OidcClient;
+﻿using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using ReactiveUI;
 using System.Reactive;
@@ -9,11 +8,14 @@ namespace WpfOidcClient.ViewModels;
 public class CommandsViewModel : ViewModel, ICommandsViewModel
 {
     private readonly IBrowser browser;
+    private readonly OidcClientOptions oidcClientOptions;
 
     public CommandsViewModel(
+        OidcClientOptions oidcClientOptions,
         IBrowser browser,
         IMessageBus messageBus) : base(messageBus)
     {
+        this.oidcClientOptions = oidcClientOptions ?? throw new ArgumentNullException(nameof(oidcClientOptions));
         this.browser = browser ?? throw new ArgumentNullException(nameof(browser));
         LogInCommand = ReactiveCommand.CreateFromTask(ExecuteLogInCommandAsync);
         LogOutCommand = ReactiveCommand.Create(() => Unit.Default);
@@ -25,34 +27,22 @@ public class CommandsViewModel : ViewModel, ICommandsViewModel
 
     private async Task<Unit> ExecuteLogInCommandAsync()
     {
-        var options = new OidcClientOptions()
-        {
-            Authority = "http://localhost:9011/",
-            ClientId = "",
-            ClientSecret = "",
-            Scope = "openid profile email offline_access",
-            RedirectUri = "http://127.0.0.1/sample-wpf-app",
-            Browser = browser,
-            Policy = new Policy
-            {
-                RequireIdentityTokenSignature = false,
-                ValidateTokenIssuerName = false,
-                Discovery = new DiscoveryPolicy
-                {
-                    ValidateIssuerName = false,
-                }
-            }
-        };
+        oidcClientOptions.Browser = browser;
 
-        var _oidcClient = new OidcClient(options);
+        var _oidcClient = new OidcClient(oidcClientOptions);
 
         try
         {
             LoginResult loginResult = await _oidcClient.LoginAsync();
+            messageBus.SendMessage(loginResult);
         }
         catch (Exception ex)
         {
-
+            messageBus.SendMessage(new LoginResult()
+            {
+                Error = ex.GetType().FullName,
+                ErrorDescription = ex.Message,
+            });
         }
 
         return Unit.Default;
