@@ -1,5 +1,6 @@
 ﻿using IdentityModel.OidcClient;
 using ReactiveUI;
+using System.Globalization;
 using System.Reactive.Linq;
 
 namespace WpfOidcClient.ViewModels;
@@ -25,6 +26,12 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
             .Select(x => x.RefreshToken)
             .ObserveOn(RxApp.MainThreadScheduler)
             .ToProperty(this, x => x.RefreshToken);
+
+        _accessTokenExpiration = messageBus
+            .Listen<LoginResult>()
+            .Select(x => x.AccessTokenExpiration.ToString("F", CultureInfo.CurrentCulture))
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .ToProperty(this, x => x.AccessTokenExpiration);
     }
 
     #region Access Token property
@@ -50,4 +57,12 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
     public string RefreshToken => _refreshToken.Value;
 
     #endregion Refresh Token property
+
+    #region Access Token Expiration property
+
+    private readonly ObservableAsPropertyHelper<string> _accessTokenExpiration;
+
+    public string AccessTokenExpiration => _accessTokenExpiration.Value;
+
+    #endregion Access Token Expiration property
 }
