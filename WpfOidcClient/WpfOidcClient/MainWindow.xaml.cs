@@ -78,6 +78,11 @@ namespace WpfOidcClient
                     .DisposeWith(disposableRegistration);
 
                 this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Results.AccessTokenValidUntil,
+                    view => view.accessTokenValidUntilTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.OneWayBind(ViewModel,
                     viewModel => viewModel.Results.Claims,
                     view => view.claimsDataGrid.ItemsSource)
                     .DisposeWith(disposableRegistration);
