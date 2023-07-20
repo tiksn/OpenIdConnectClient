@@ -31,7 +31,7 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
             .ToProperty(this, x => x.AccessTokenExpiration);
 
         _claims = messageBus
-            .Changes(x => x.User.Claims, _ => Array.Empty<Claim>())
+            .Changes(x => x.User.Claims, _ => Array.Empty<Claim>(), x => x.Claims)
             .Select(MapClaims)
             .ObserveOn(RxApp.MainThreadScheduler)
             .ToProperty(this, x => x.Claims);
