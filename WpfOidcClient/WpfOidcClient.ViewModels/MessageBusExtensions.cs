@@ -35,6 +35,12 @@ public static class MessageBusExtensions
             .Listen<RefreshTokenResult>()
             .Select(refreshTokenResultSelector);
 
-        return loginResultChanges.Merge(refreshTokenResultChanges);
+        IObservable<T> logoutResultChanges = messageBus
+            .Listen<LogoutResult>()
+            .Select(_ => default(T));
+
+        return loginResultChanges
+            .Merge(refreshTokenResultChanges)
+            .Merge(logoutResultChanges);
     }
 }
