@@ -46,17 +46,17 @@ namespace WpfOidcClient
                     .DisposeWith(disposableRegistration);
 
                 this.BindCommand(ViewModel,
-                    viewModel => viewModel.Commands.LogInCommand,
+                    viewModel => viewModel.Actions.LogInCommand,
                     view => view.logInButton)
                     .DisposeWith(disposableRegistration);
 
                 this.BindCommand(ViewModel,
-                    viewModel => viewModel.Commands.RefreshCommand,
+                    viewModel => viewModel.Actions.RefreshCommand,
                     view => view.refreshButton)
                     .DisposeWith(disposableRegistration);
 
                 this.BindCommand(ViewModel,
-                    viewModel => viewModel.Commands.LogOutCommand,
+                    viewModel => viewModel.Actions.LogOutCommand,
                     view => view.logOutButton)
                     .DisposeWith(disposableRegistration);
 
