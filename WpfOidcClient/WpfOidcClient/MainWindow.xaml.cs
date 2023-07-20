@@ -48,6 +48,11 @@ namespace WpfOidcClient
                     .DisposeWith(disposableRegistration);
 
                 this.BindCommand(ViewModel,
+                    viewModel => viewModel.Commands.RefreshCommand,
+                    view => view.refreshButton)
+                    .DisposeWith(disposableRegistration);
+
+                this.BindCommand(ViewModel,
                     viewModel => viewModel.Commands.LogOutCommand,
                     view => view.logOutButton)
                     .DisposeWith(disposableRegistration);
