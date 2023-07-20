@@ -6,6 +6,8 @@ public interface IResultsViewModel
 
     public string AccessTokenExpiration { get; }
 
+    public IReadOnlyList<ClaimViewModel> Claims { get; }
+
     public string IdentityToken { get; }
 
     public string RefreshToken { get; }
