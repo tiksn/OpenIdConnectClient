@@ -142,6 +142,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Label
@@ -152,6 +153,19 @@
             <TextBox
                 x:Name="accessTokenTextBox"
                 Grid.Row="0"
+                Grid.Column="1"
+                Margin="4"
+                VerticalContentAlignment="Center"
+                IsReadOnly="True" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="4"
+                Content="Identity Token" />
+            <TextBox
+                x:Name="identityTokenTextBox"
+                Grid.Row="1"
                 Grid.Column="1"
                 Margin="4"
                 VerticalContentAlignment="Center"
