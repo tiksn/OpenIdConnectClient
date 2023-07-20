@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WpfOidcClient.Models\WpfOidcClient.Models.csproj" />
     <ProjectReference Include="..\WpfOidcClient.ViewModels\WpfOidcClient.ViewModels.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,8 @@
 ﻿using ReactiveUI;
+using System;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using WpfOidcClient.Models;
 using WpfOidcClient.ViewModels;
 
 namespace WpfOidcClient
@@ -78,9 +81,22 @@ namespace WpfOidcClient
                     .DisposeWith(disposableRegistration);
 
                 this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Results.AccessTokenValidUntil,
+                    view => view.accessTokenValidUntilTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.OneWayBind(ViewModel,
                     viewModel => viewModel.Results.Claims,
                     view => view.claimsDataGrid.ItemsSource)
                     .DisposeWith(disposableRegistration);
+
+                var tickObservable = Observable
+                    .Interval(TimeSpan.FromSeconds(1))
+                    .Select(_ => new TickModel());
+
+                AppHost
+                    .GetRequiredService<IMessageBus>()
+                    .RegisterMessageSource(tickObservable);
             });
         }
     }

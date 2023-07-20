@@ -1,13 +1,18 @@
-﻿using ReactiveUI;
+﻿using Humanizer;
+using ReactiveUI;
 using System.Globalization;
 using System.Reactive.Linq;
 using System.Security.Claims;
+using TIKSN.Time;
+using WpfOidcClient.Models;
 
 namespace WpfOidcClient.ViewModels;
 
 public class ResultsViewModel : ViewModel, IResultsViewModel
 {
-    public ResultsViewModel(IMessageBus messageBus) : base(messageBus)
+    public ResultsViewModel(
+        ITimeProvider timeProvider,
+        IMessageBus messageBus) : base(messageBus)
     {
         _accessToken = messageBus
             .Changes(x => x.AccessToken, x => x.AccessToken)
@@ -24,11 +29,33 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
             .ObserveOn(RxApp.MainThreadScheduler)
             .ToProperty(this, x => x.RefreshToken);
 
-        _accessTokenExpiration = messageBus
-            .Changes(x => x.AccessTokenExpiration, x => x.AccessTokenExpiration)
+        var accessTokenExpirationLastValue = DateTimeOffset.MinValue;
+
+        var accessTokenExpirationFromMessageBus = messageBus
+            .Changes(x => x.AccessTokenExpiration, x => x.AccessTokenExpiration);
+
+        _accessTokenExpiration = accessTokenExpirationFromMessageBus
+            .Do(x =>
+            {
+                accessTokenExpirationLastValue = x;
+            })
             .Select(x => x.ToString("F", CultureInfo.CurrentCulture))
             .ObserveOn(RxApp.MainThreadScheduler)
             .ToProperty(this, x => x.AccessTokenExpiration);
+
+        var accessTokenExpirationFromTickModel = messageBus
+            .Listen<TickModel>()
+            .Where(_ => !string.IsNullOrEmpty(AccessToken))
+            .Select(_ => accessTokenExpirationLastValue);
+
+        _accessTokenValidUntil = accessTokenExpirationFromMessageBus.Merge(accessTokenExpirationFromTickModel)
+            .Select(x => x - timeProvider.GetCurrentTime())
+            .Select(x => x >= TimeSpan.Zero
+                ? x.Humanize(1, CultureInfo.CurrentCulture)
+                : "Expired")
+            .DistinctUntilChanged()
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .ToProperty(this, x => x.AccessTokenValidUntil);
 
         _claims = messageBus
             .Changes(x => x.User.Claims, _ => Array.Empty<Claim>(), x => x.Claims)
@@ -77,6 +104,14 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
     public string AccessTokenExpiration => _accessTokenExpiration.Value;
 
     #endregion Access Token Expiration property
+
+    #region Access Token Valid Until property
+
+    private readonly ObservableAsPropertyHelper<string> _accessTokenValidUntil;
+
+    public string AccessTokenValidUntil => _accessTokenValidUntil.Value;
+
+    #endregion Access Token Valid Until property
 
     #region Claims property
 
