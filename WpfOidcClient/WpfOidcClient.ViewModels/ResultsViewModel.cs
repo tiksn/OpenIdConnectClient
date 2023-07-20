@@ -58,13 +58,13 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
             .ToProperty(this, x => x.AccessTokenValidUntil);
 
         _claims = messageBus
-            .Changes(x => x.User.Claims, _ => Array.Empty<Claim>(), x => x.Claims)
+            .Changes(x => x?.User?.Claims, _ => Array.Empty<Claim>(), x => x.Claims)
             .Select(MapClaims)
             .ObserveOn(RxApp.MainThreadScheduler)
             .ToProperty(this, x => x.Claims);
     }
 
-    private IReadOnlyList<ClaimViewModel> MapClaims(IEnumerable<Claim> claims)
+    private IReadOnlyList<ClaimViewModel> MapClaims(IEnumerable<Claim>? claims)
     {
         return (claims ?? Enumerable.Empty<Claim>())
             .Select(x => new ClaimViewModel(x.Type, x.Value))

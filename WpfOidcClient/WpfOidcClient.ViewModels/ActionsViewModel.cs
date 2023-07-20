@@ -4,17 +4,20 @@ using IdentityModel.OidcClient.Results;
 using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
+using TIKSN.Time;
+using WpfOidcClient.Models;
 
 namespace WpfOidcClient.ViewModels;
 
-public class CommandsViewModel : ViewModel, ICommandsViewModel
+public class ActionsViewModel : ViewModel, IActionsViewModel
 {
     private readonly IBrowser browser;
     private readonly OidcClientOptions oidcClientOptions;
 
-    public CommandsViewModel(
+    public ActionsViewModel(
         OidcClientOptions oidcClientOptions,
         IBrowser browser,
+        ITimeProvider timeProvider,
         IMessageBus messageBus) : base(messageBus)
     {
         this.oidcClientOptions = oidcClientOptions ?? throw new ArgumentNullException(nameof(oidcClientOptions));
@@ -27,6 +30,11 @@ public class CommandsViewModel : ViewModel, ICommandsViewModel
             .ObserveOn(RxApp.MainThreadScheduler)
             .ToProperty(this, x => x.RefreshToken);
 
+        _accessTokenExpiration = messageBus
+            .Changes(x => x.AccessTokenExpiration, x => x.AccessTokenExpiration)
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .ToProperty(this, x => x.AccessTokenExpiration);
+
         LogInCommand = ReactiveCommand.CreateFromTask(ExecuteLogInCommandAsync);
 
         LogOutCommand = ReactiveCommand.CreateFromTask(
@@ -36,6 +44,15 @@ public class CommandsViewModel : ViewModel, ICommandsViewModel
         RefreshCommand = ReactiveCommand.CreateFromTask(
             ExecuteRefreshCommandAsync,
             refreshTokenChanges.Select(x => !string.IsNullOrEmpty(x)));
+
+        messageBus
+            .Listen<TickModel>()
+            .Where(_ => AutoRefresh)
+            .Where(_ => !string.IsNullOrEmpty(RefreshToken))
+            .Where(_ => AccessTokenExpiration < timeProvider.GetCurrentTime())
+            .Select(_ => Observable.FromAsync(async () => await ExecuteRefreshCommandAsync()))
+            .Merge()
+            .Subscribe();
     }
 
     #region Log In Command
@@ -131,6 +148,14 @@ public class CommandsViewModel : ViewModel, ICommandsViewModel
 
     #endregion Refresh Command
 
+    #region Access Token Expiration property
+
+    private readonly ObservableAsPropertyHelper<DateTimeOffset> _accessTokenExpiration;
+
+    public DateTimeOffset AccessTokenExpiration => _accessTokenExpiration.Value;
+
+    #endregion Access Token Expiration property
+
     #region Refresh Token property
 
     private readonly ObservableAsPropertyHelper<string> _refreshToken;
@@ -138,4 +163,16 @@ public class CommandsViewModel : ViewModel, ICommandsViewModel
     public string RefreshToken => _refreshToken.Value;
 
     #endregion Refresh Token property
+
+    #region Auto Refresh property
+
+    private bool _autoRefresh;
+
+    public bool AutoRefresh
+    {
+        get => _autoRefresh;
+        set => this.RaiseAndSetIfChanged(ref _autoRefresh, value);
+    }
+
+    #endregion Auto Refresh property
 }

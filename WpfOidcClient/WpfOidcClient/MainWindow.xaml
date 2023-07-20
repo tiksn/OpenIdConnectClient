@@ -107,6 +107,7 @@
                                 Margin="4"
                                 Content="Refresh" />
                             <CheckBox
+                                x:Name="autoRefreshCheckBox"
                                 Width="100"
                                 Height="20"
                                 Margin="4"

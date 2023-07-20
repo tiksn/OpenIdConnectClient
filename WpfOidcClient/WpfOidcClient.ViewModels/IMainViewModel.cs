@@ -4,7 +4,7 @@ public interface IMainViewModel
 {
     IClientOptionsViewModel ClientOptions { get; }
 
-    ICommandsViewModel Commands { get; }
+    IActionsViewModel Actions { get; }
 
     IResultsViewModel Results { get; }
 }
