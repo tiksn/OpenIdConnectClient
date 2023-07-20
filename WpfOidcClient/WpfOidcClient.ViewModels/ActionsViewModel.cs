@@ -4,6 +4,8 @@ using IdentityModel.OidcClient.Results;
 using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
+using TIKSN.Time;
+using WpfOidcClient.Models;
 
 namespace WpfOidcClient.ViewModels;
 
@@ -15,6 +17,7 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
     public ActionsViewModel(
         OidcClientOptions oidcClientOptions,
         IBrowser browser,
+        ITimeProvider timeProvider,
         IMessageBus messageBus) : base(messageBus)
     {
         this.oidcClientOptions = oidcClientOptions ?? throw new ArgumentNullException(nameof(oidcClientOptions));
@@ -27,6 +30,11 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
             .ObserveOn(RxApp.MainThreadScheduler)
             .ToProperty(this, x => x.RefreshToken);
 
+        _accessTokenExpiration = messageBus
+            .Changes(x => x.AccessTokenExpiration, x => x.AccessTokenExpiration)
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .ToProperty(this, x => x.AccessTokenExpiration);
+
         LogInCommand = ReactiveCommand.CreateFromTask(ExecuteLogInCommandAsync);
 
         LogOutCommand = ReactiveCommand.CreateFromTask(
@@ -36,6 +44,15 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
         RefreshCommand = ReactiveCommand.CreateFromTask(
             ExecuteRefreshCommandAsync,
             refreshTokenChanges.Select(x => !string.IsNullOrEmpty(x)));
+
+        messageBus
+            .Listen<TickModel>()
+            .Where(_ => AutoRefresh)
+            .Where(_ => !string.IsNullOrEmpty(RefreshToken))
+            .Where(_ => AccessTokenExpiration < timeProvider.GetCurrentTime())
+            .Select(_ => Observable.FromAsync(async () => await ExecuteRefreshCommandAsync()))
+            .Merge()
+            .Subscribe();
     }
 
     #region Log In Command
@@ -130,6 +147,14 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
     }
 
     #endregion Refresh Command
+
+    #region Access Token Expiration property
+
+    private readonly ObservableAsPropertyHelper<DateTimeOffset> _accessTokenExpiration;
+
+    public DateTimeOffset AccessTokenExpiration => _accessTokenExpiration.Value;
+
+    #endregion Access Token Expiration property
 
     #region Refresh Token property
 
