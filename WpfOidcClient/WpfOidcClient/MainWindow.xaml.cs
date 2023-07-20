@@ -51,6 +51,11 @@ namespace WpfOidcClient
                     viewModel => viewModel.Commands.LogOutCommand,
                     view => view.logOutButton)
                     .DisposeWith(disposableRegistration);
+
+                this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Results.AccessToken,
+                    view => view.accessTokenTextBox.Text)
+                    .DisposeWith(disposableRegistration);
             });
         }
     }
