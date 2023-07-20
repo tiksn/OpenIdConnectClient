@@ -55,6 +55,11 @@ namespace WpfOidcClient
                     view => view.refreshButton)
                     .DisposeWith(disposableRegistration);
 
+                this.Bind(ViewModel,
+                    viewModel => viewModel.Actions.AutoRefresh,
+                    view => view.autoRefreshCheckBox.IsChecked)
+                    .DisposeWith(disposableRegistration);
+
                 this.BindCommand(ViewModel,
                     viewModel => viewModel.Actions.LogOutCommand,
                     view => view.logOutButton)
