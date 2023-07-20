@@ -66,6 +66,11 @@ namespace WpfOidcClient
                     viewModel => viewModel.Results.RefreshToken,
                     view => view.refreshTokenTextBox.Text)
                     .DisposeWith(disposableRegistration);
+
+                this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Results.AccessTokenExpiration,
+                    view => view.accessTokenExpirationTextBox.Text)
+                    .DisposeWith(disposableRegistration);
             });
         }
     }
