@@ -19,6 +19,12 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
             .Select(x => x.IdentityToken)
             .ObserveOn(RxApp.MainThreadScheduler)
             .ToProperty(this, x => x.IdentityToken);
+
+        _refreshToken = messageBus
+            .Listen<LoginResult>()
+            .Select(x => x.RefreshToken)
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .ToProperty(this, x => x.RefreshToken);
     }
 
     #region Access Token property
@@ -36,4 +42,12 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
     public string IdentityToken => _identityToken.Value;
 
     #endregion Identity Token property
+
+    #region Refresh Token property
+
+    private readonly ObservableAsPropertyHelper<string> _refreshToken;
+
+    public string RefreshToken => _refreshToken.Value;
+
+    #endregion Refresh Token property
 }
