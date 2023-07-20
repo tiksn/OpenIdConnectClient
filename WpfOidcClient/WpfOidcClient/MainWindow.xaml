@@ -143,6 +143,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Label
@@ -166,6 +167,19 @@
             <TextBox
                 x:Name="identityTokenTextBox"
                 Grid.Row="1"
+                Grid.Column="1"
+                Margin="4"
+                VerticalContentAlignment="Center"
+                IsReadOnly="True" />
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="4"
+                Content="Refresh Token" />
+            <TextBox
+                x:Name="refreshTokenTextBox"
+                Grid.Row="2"
                 Grid.Column="1"
                 Margin="4"
                 VerticalContentAlignment="Center"
