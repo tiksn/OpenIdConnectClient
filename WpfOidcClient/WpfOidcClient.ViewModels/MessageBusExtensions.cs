@@ -10,6 +10,25 @@ public static class MessageBusExtensions
     public static IObservable<T> Changes<T>(
         this IMessageBus messageBus,
         Func<LoginResult, T> loginResultSelector,
+        Func<RefreshTokenResult, T> refreshTokenResultSelector,
+        Func<UserInfoResult, T> userInfoResultSelector)
+    {
+        if (userInfoResultSelector is null)
+        {
+            throw new ArgumentNullException(nameof(userInfoResultSelector));
+        }
+
+        IObservable<T> userInfoResultChanges = messageBus
+            .Listen<UserInfoResult>()
+            .Select(userInfoResultSelector);
+
+        return Changes(messageBus, loginResultSelector, refreshTokenResultSelector)
+            .Merge(userInfoResultChanges);
+    }
+
+    public static IObservable<T> Changes<T>(
+        this IMessageBus messageBus,
+        Func<LoginResult, T> loginResultSelector,
         Func<RefreshTokenResult, T> refreshTokenResultSelector)
     {
         if (messageBus is null)
