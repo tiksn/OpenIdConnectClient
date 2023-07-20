@@ -138,4 +138,16 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
     public string RefreshToken => _refreshToken.Value;
 
     #endregion Refresh Token property
+
+    #region Auto Refresh property
+
+    private bool _autoRefresh;
+
+    public bool AutoRefresh
+    {
+        get => _autoRefresh;
+        set => this.RaiseAndSetIfChanged(ref _autoRefresh, value);
+    }
+
+    #endregion Auto Refresh property
 }
