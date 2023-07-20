@@ -7,12 +7,12 @@ using System.Reactive.Linq;
 
 namespace WpfOidcClient.ViewModels;
 
-public class CommandsViewModel : ViewModel, ICommandsViewModel
+public class ActionsViewModel : ViewModel, IActionsViewModel
 {
     private readonly IBrowser browser;
     private readonly OidcClientOptions oidcClientOptions;
 
-    public CommandsViewModel(
+    public ActionsViewModel(
         OidcClientOptions oidcClientOptions,
         IBrowser browser,
         IMessageBus messageBus) : base(messageBus)
