@@ -108,8 +108,14 @@ public class CommandsViewModel : ViewModel, ICommandsViewModel
 
         try
         {
-            RefreshTokenResult refreshTokenResult = await _oidcClient.RefreshTokenAsync(this.RefreshToken);
+            RefreshTokenResult refreshTokenResult = await _oidcClient.RefreshTokenAsync(RefreshToken);
             messageBus.SendMessage(refreshTokenResult);
+
+            if (!string.IsNullOrEmpty(refreshTokenResult.AccessToken))
+            {
+                UserInfoResult userInfoResult = await _oidcClient.GetUserInfoAsync(refreshTokenResult.AccessToken);
+                messageBus.SendMessage(userInfoResult);
+            }
         }
         catch (Exception ex)
         {
