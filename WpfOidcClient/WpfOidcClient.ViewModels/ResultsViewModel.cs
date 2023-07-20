@@ -32,6 +32,21 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
             .Select(x => x.AccessTokenExpiration.ToString("F", CultureInfo.CurrentCulture))
             .ObserveOn(RxApp.MainThreadScheduler)
             .ToProperty(this, x => x.AccessTokenExpiration);
+
+        _claims = messageBus
+            .Listen<LoginResult>()
+            .Select(MapClaims)
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .ToProperty(this, x => x.Claims);
+    }
+
+    private IReadOnlyList<ClaimViewModel> MapClaims(LoginResult result)
+    {
+        return result.User.Claims
+            .Select(x => new ClaimViewModel(x.Type, x.Value))
+            .OrderBy(x => x.Type, StringComparer.Ordinal)
+            .ThenBy(x => x.Value, StringComparer.Ordinal)
+            .ToArray();
     }
 
     #region Access Token property
@@ -65,4 +80,12 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
     public string AccessTokenExpiration => _accessTokenExpiration.Value;
 
     #endregion Access Token Expiration property
+
+    #region Claims property
+
+    private readonly ObservableAsPropertyHelper<IReadOnlyList<ClaimViewModel>> _claims;
+
+    public IReadOnlyList<ClaimViewModel> Claims => _claims.Value;
+
+    #endregion Claims property
 }
