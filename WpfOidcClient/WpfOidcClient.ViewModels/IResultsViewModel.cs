@@ -2,4 +2,5 @@
 
 public interface IResultsViewModel
 {
+    public string AccessToken { get; }
 }
