@@ -39,7 +39,7 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
 
     private IReadOnlyList<ClaimViewModel> MapClaims(IEnumerable<Claim> claims)
     {
-        return claims
+        return (claims ?? Enumerable.Empty<Claim>())
             .Select(x => new ClaimViewModel(x.Type, x.Value))
             .OrderBy(x => x.Type, StringComparer.Ordinal)
             .ThenBy(x => x.Value, StringComparer.Ordinal)
