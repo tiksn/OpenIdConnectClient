@@ -29,7 +29,9 @@ public class CommandsViewModel : ViewModel, ICommandsViewModel
 
         LogInCommand = ReactiveCommand.CreateFromTask(ExecuteLogInCommandAsync);
 
-        LogOutCommand = ReactiveCommand.Create(() => Unit.Default);
+        LogOutCommand = ReactiveCommand.CreateFromTask(
+            ExecuteLogOutCommandAsync,
+            refreshTokenChanges.Select(x => !string.IsNullOrEmpty(x)));
 
         RefreshCommand = ReactiveCommand.CreateFromTask(
             ExecuteRefreshCommandAsync,
@@ -68,6 +70,29 @@ public class CommandsViewModel : ViewModel, ICommandsViewModel
     #region Log Out Command
 
     public ReactiveCommand<Unit, Unit> LogOutCommand { get; protected set; }
+
+    private async Task<Unit> ExecuteLogOutCommandAsync()
+    {
+        oidcClientOptions.Browser = browser;
+
+        var _oidcClient = new OidcClient(oidcClientOptions);
+
+        try
+        {
+            LogoutResult logoutResult = await _oidcClient.LogoutAsync();
+            messageBus.SendMessage(logoutResult);
+        }
+        catch (Exception ex)
+        {
+            messageBus.SendMessage(new LogoutResult()
+            {
+                Error = ex.GetType().FullName,
+                ErrorDescription = ex.Message,
+            });
+        }
+
+        return Unit.Default;
+    }
 
     #endregion Log Out Command
 
