@@ -101,6 +101,7 @@
                     <GroupBox Margin="4" Header="Refresh">
                         <StackPanel>
                             <Button
+                                x:Name="refreshButton"
                                 Width="100"
                                 Height="20"
                                 Margin="4"
@@ -121,14 +122,12 @@
                                 Width="100"
                                 Height="20"
                                 Margin="4"
-                                Command="{Binding Path=Commands.LogInCommand}"
                                 Content="Log In" />
                             <Button
                                 x:Name="logOutButton"
                                 Width="100"
                                 Height="20"
                                 Margin="4"
-                                Command="{Binding Path=Commands.LogOutCommand}"
                                 Content="Log Out" />
                         </StackPanel>
                     </GroupBox>
