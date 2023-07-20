@@ -3,7 +3,7 @@ using System.Reactive;
 
 namespace WpfOidcClient.ViewModels;
 
-public interface ICommandsViewModel
+public interface IActionsViewModel
 {
     ReactiveCommand<Unit, Unit> LogInCommand { get; }
 
