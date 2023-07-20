@@ -51,6 +51,31 @@ namespace WpfOidcClient
                     viewModel => viewModel.Commands.LogOutCommand,
                     view => view.logOutButton)
                     .DisposeWith(disposableRegistration);
+
+                this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Results.AccessToken,
+                    view => view.accessTokenTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Results.IdentityToken,
+                    view => view.identityTokenTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Results.RefreshToken,
+                    view => view.refreshTokenTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Results.AccessTokenExpiration,
+                    view => view.accessTokenExpirationTextBox.Text)
+                    .DisposeWith(disposableRegistration);
+
+                this.OneWayBind(ViewModel,
+                    viewModel => viewModel.Results.Claims,
+                    view => view.claimsDataGrid.ItemsSource)
+                    .DisposeWith(disposableRegistration);
             });
         }
     }
