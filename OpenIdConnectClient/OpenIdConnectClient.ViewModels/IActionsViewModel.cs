@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using System.Reactive;
 
-namespace WpfOidcClient.ViewModels;
+namespace OpenIdConnectClient.ViewModels;
 
 public interface IActionsViewModel
 {

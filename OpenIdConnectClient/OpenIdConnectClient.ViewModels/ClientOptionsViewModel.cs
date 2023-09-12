@@ -1,22 +1,23 @@
 ﻿using IdentityModel.OidcClient;
 using ReactiveUI;
 using System.Reactive;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 
-namespace WpfOidcClient.ViewModels;
+namespace OpenIdConnectClient.ViewModels;
 
 public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
 {
+    private readonly OidcClientOptions oidcClientOptions;
+
     public ClientOptionsViewModel(
-        OidcClientOptions ovoidClientOptions,
+        OidcClientOptions oidcClientOptions,
         IMessageBus messageBus) : base(messageBus)
     {
         Authority = "http://localhost:9011/";
         Scope = "openid profile email offline_access";
         RedirectUrl = "http://127.0.0.1/sample-wpf-app";
 
-        oidcClientOptions = ovoidClientOptions ?? throw new ArgumentNullException(nameof(ovoidClientOptions));
+        this.oidcClientOptions = oidcClientOptions ?? throw new ArgumentNullException(nameof(oidcClientOptions));
 
         UpdateClientOptions();
 
@@ -104,7 +105,6 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
     #region Scope property
 
     private string _scope;
-    private readonly OidcClientOptions oidcClientOptions;
 
     public string Scope
     {

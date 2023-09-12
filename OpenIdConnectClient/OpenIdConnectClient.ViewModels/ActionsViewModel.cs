@@ -1,13 +1,13 @@
 ﻿using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using IdentityModel.OidcClient.Results;
+using OpenIdConnectClient.Models;
 using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
 using TIKSN.Time;
-using WpfOidcClient.Models;
 
-namespace WpfOidcClient.ViewModels;
+namespace OpenIdConnectClient.ViewModels;
 
 public class ActionsViewModel : ViewModel, IActionsViewModel
 {

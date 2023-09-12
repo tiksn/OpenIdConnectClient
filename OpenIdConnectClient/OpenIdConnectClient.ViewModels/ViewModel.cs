@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace WpfOidcClient.ViewModels;
+namespace OpenIdConnectClient.ViewModels;
 
 public abstract class ViewModel : ReactiveObject
 {

@@ -1,6 +1,6 @@
 ﻿using ReactiveUI;
 
-namespace WpfOidcClient.ViewModels;
+namespace OpenIdConnectClient.ViewModels;
 
 public class MainViewModel : ViewModel, IMainViewModel
 {

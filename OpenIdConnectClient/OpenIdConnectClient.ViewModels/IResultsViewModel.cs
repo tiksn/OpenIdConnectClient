@@ -1,4 +1,4 @@
-﻿namespace WpfOidcClient.ViewModels;
+﻿namespace OpenIdConnectClient.ViewModels;
 
 public interface IResultsViewModel
 {

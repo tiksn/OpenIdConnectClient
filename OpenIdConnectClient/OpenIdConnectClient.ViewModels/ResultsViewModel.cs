@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Reactive.Linq;
 using System.Security.Claims;
 using TIKSN.Time;
-using WpfOidcClient.Models;
+using OpenIdConnectClient.Models;
 
-namespace WpfOidcClient.ViewModels;
+namespace OpenIdConnectClient.ViewModels;
 
 public class ResultsViewModel : ViewModel, IResultsViewModel
 {

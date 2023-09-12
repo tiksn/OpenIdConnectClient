@@ -3,7 +3,7 @@ using IdentityModel.OidcClient.Results;
 using ReactiveUI;
 using System.Reactive.Linq;
 
-namespace WpfOidcClient.ViewModels;
+namespace OpenIdConnectClient.ViewModels;
 
 public static class MessageBusExtensions
 {

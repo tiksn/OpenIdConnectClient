@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfOidcClient
+namespace OpenIdConnectClient.Wpf
 {
     public class WpfEmbeddedBrowser : IBrowser
     {

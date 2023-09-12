@@ -2,10 +2,10 @@
 using System;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using WpfOidcClient.Models;
-using WpfOidcClient.ViewModels;
+using OpenIdConnectClient.Models;
+using OpenIdConnectClient.ViewModels;
 
-namespace WpfOidcClient
+namespace OpenIdConnectClient.Wpf
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
