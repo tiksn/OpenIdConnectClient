@@ -6,10 +6,10 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
 using TIKSN.DependencyInjection;
-using WpfOidcClient.Models;
-using WpfOidcClient.ViewModels;
+using OpenIdConnectClient.Models;
+using OpenIdConnectClient.ViewModels;
 
-namespace WpfOidcClient
+namespace OpenIdConnectClient.Wpf
 {
     public static class AppHost
     {

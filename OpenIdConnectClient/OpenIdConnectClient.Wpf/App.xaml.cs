@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WpfOidcClient
+namespace OpenIdConnectClient.Wpf
 {
     /// <summary>
     /// Interaction logic for App.xaml

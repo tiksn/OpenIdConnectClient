@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace WpfOidcClient.Models;
+namespace OpenIdConnectClient.Models;
 
 public static class ModelServices
 {
