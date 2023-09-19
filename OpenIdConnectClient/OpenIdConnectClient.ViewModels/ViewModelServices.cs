@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ReactiveUI;
 
 namespace OpenIdConnectClient.ViewModels;
 
@@ -10,5 +11,6 @@ public static class ViewModelServices
         services.AddSingleton<IClientOptionsViewModel, ClientOptionsViewModel>();
         services.AddSingleton<IActionsViewModel, ActionsViewModel>();
         services.AddSingleton<IResultsViewModel, ResultsViewModel>();
+        services.AddSingleton<AboutViewModel>();
     }
 }
