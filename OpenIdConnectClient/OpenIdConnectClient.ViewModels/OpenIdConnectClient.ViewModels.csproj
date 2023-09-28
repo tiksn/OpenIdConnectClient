@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Humanizer" Version="2.14.1" />
     <PackageReference Include="IdentityModel.OidcClient" Version="5.2.1" />
-    <PackageReference Include="TIKSN-Framework" Version="4.5.0-alpha.11" />
+    <PackageReference Include="TIKSN-Framework" Version="4.5.0-alpha.12" />
   </ItemGroup>
 
   <ItemGroup>
