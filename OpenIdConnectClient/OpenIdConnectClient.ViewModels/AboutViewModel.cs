@@ -6,6 +6,7 @@
 using OpenIdConnectClient.Models;
 using ReactiveUI;
 using System.Reactive;
+using static LanguageExt.Prelude;
 
 namespace OpenIdConnectClient.ViewModels
 {
@@ -22,7 +23,7 @@ namespace OpenIdConnectClient.ViewModels
         public AboutViewModel(
                 ISchedulers schedulers,
                 IScreen hostScreen)
-            : base("About", schedulers, hostScreen)
+            : base(Seq1("About"), schedulers, hostScreen)
         {
             ShowIconCredits = ReactiveCommand.CreateFromObservable<string, Unit>(url => OpenBrowser.Handle(url));
             ShowIconCredits.Subscribe();
