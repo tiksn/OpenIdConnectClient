@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenIdConnectClient.Wpf", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenIdConnectClient.ViewModels", "OpenIdConnectClient.ViewModels\OpenIdConnectClient.ViewModels.csproj", "{63D9AB8F-9333-4D9D-BA86-DA89B60726D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenIdConnectClient.Models", "OpenIdConnectClient.Models\OpenIdConnectClient.Models.csproj", "{39967A30-5E34-45DF-8F0C-2E24917B0B69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenIdConnectClient.Models", "OpenIdConnectClient.Models\OpenIdConnectClient.Models.csproj", "{39967A30-5E34-45DF-8F0C-2E24917B0B69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenIdConnectClient.Maui", "OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj", "{56E59510-8B7D-4180-BE04-45C7849BCE6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,12 @@ Global
 		{39967A30-5E34-45DF-8F0C-2E24917B0B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39967A30-5E34-45DF-8F0C-2E24917B0B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39967A30-5E34-45DF-8F0C-2E24917B0B69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E59510-8B7D-4180-BE04-45C7849BCE6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56E59510-8B7D-4180-BE04-45C7849BCE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56E59510-8B7D-4180-BE04-45C7849BCE6B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{56E59510-8B7D-4180-BE04-45C7849BCE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56E59510-8B7D-4180-BE04-45C7849BCE6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56E59510-8B7D-4180-BE04-45C7849BCE6B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
