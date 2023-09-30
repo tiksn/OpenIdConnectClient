@@ -4,10 +4,8 @@
 // See the LICENSE file in the project root for full license information.
 
 using System.Reactive;
-using System.Reactive.Concurrency;
 using OpenIdConnectClient.Models;
 using ReactiveUI;
-using Splat;
 
 namespace OpenIdConnectClient.ViewModels
 {
@@ -19,18 +17,29 @@ namespace OpenIdConnectClient.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewModelBase"/> class.
         /// </summary>
-        /// <param name="title">The title of the view model for routing purposes.</param>
+        /// <param name="urlPathSegments">The title of the view model for routing purposes.</param>
         /// <param name="schedulers"></param>
         /// <param name="hostScreen">The screen used for routing purposes.</param>
-        protected ViewModelBase(string title, ISchedulers schedulers, IScreen hostScreen)
+        protected ViewModelBase(IEnumerable<string> urlPathSegments, ISchedulers schedulers, IScreen hostScreen)
         {
+            if (urlPathSegments is null)
+            {
+                throw new ArgumentNullException(nameof(urlPathSegments));
+            }
+
+            if (urlPathSegments.IsEmpty())
+            {
+                throw new ArgumentOutOfRangeException(nameof(urlPathSegments));
+            }
+
+
             if (schedulers is null)
             {
                 throw new ArgumentNullException(nameof(schedulers));
             }
 
-            UrlPathSegment = title;
-            HostScreen = hostScreen;
+            UrlPathSegment = string.Join('/', urlPathSegments);
+            HostScreen = hostScreen ?? throw new ArgumentNullException(nameof(hostScreen));
 
             ShowAlert = new Interaction<AlertViewModel, Unit>(schedulers.MainThreadScheduler);
             OpenBrowser = new Interaction<string, Unit>(schedulers.MainThreadScheduler);
