@@ -1,13 +1,15 @@
-﻿using ReactiveUI;
+﻿using OpenIdConnectClient.Models;
+using ReactiveUI;
 
 namespace OpenIdConnectClient.ViewModels;
 
-public abstract class ViewModel : ReactiveObject
+public abstract class ViewModel : ViewModelBase
 {
-    protected readonly IMessageBus messageBus;
-
-    protected ViewModel(IMessageBus messageBus)
+    protected ViewModel(
+        IEnumerable<string> urlPathSegments,
+        IMessageBus messageBus,
+        ISchedulers schedulers,
+        IScreen hostScreen) : base(urlPathSegments, messageBus, schedulers, hostScreen)
     {
-        this.messageBus = messageBus ?? throw new ArgumentNullException(nameof(messageBus));
     }
 }
