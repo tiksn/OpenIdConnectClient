@@ -1,10 +1,12 @@
 ﻿using Humanizer;
+using LanguageExt;
+using OpenIdConnectClient.Models;
 using ReactiveUI;
 using System.Globalization;
 using System.Reactive.Linq;
 using System.Security.Claims;
 using TIKSN.Time;
-using OpenIdConnectClient.Models;
+using static LanguageExt.Prelude;
 
 namespace OpenIdConnectClient.ViewModels;
 
@@ -12,21 +14,24 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
 {
     public ResultsViewModel(
         ITimeProvider timeProvider,
-        IMessageBus messageBus) : base(messageBus)
+        IMessageBus messageBus,
+        ISchedulers schedulers,
+        IScreen hostScreen)
+        : base(Seq1("Results"), messageBus, schedulers, hostScreen)
     {
         _accessToken = messageBus
             .Changes(x => x.AccessToken, x => x.AccessToken)
-            .ObserveOn(RxApp.MainThreadScheduler)
+            .ObserveOn(schedulers.MainThreadScheduler)
             .ToProperty(this, x => x.AccessToken);
 
         _identityToken = messageBus
             .Changes(x => x.IdentityToken, x => x.IdentityToken)
-            .ObserveOn(RxApp.MainThreadScheduler)
+            .ObserveOn(schedulers.MainThreadScheduler)
             .ToProperty(this, x => x.IdentityToken);
 
         _refreshToken = messageBus
             .Changes(x => x.RefreshToken, x => x.RefreshToken)
-            .ObserveOn(RxApp.MainThreadScheduler)
+            .ObserveOn(schedulers.MainThreadScheduler)
             .ToProperty(this, x => x.RefreshToken);
 
         var accessTokenExpirationLastValue = DateTimeOffset.MinValue;
@@ -40,7 +45,7 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
                 accessTokenExpirationLastValue = x;
             })
             .Select(x => x.ToString("F", CultureInfo.CurrentCulture))
-            .ObserveOn(RxApp.MainThreadScheduler)
+            .ObserveOn(schedulers.MainThreadScheduler)
             .ToProperty(this, x => x.AccessTokenExpiration);
 
         var accessTokenExpirationFromTickModel = messageBus
@@ -54,13 +59,13 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
                 ? x.Humanize(1, CultureInfo.CurrentCulture)
                 : "Expired")
             .DistinctUntilChanged()
-            .ObserveOn(RxApp.MainThreadScheduler)
+            .ObserveOn(schedulers.MainThreadScheduler)
             .ToProperty(this, x => x.AccessTokenValidUntil);
 
         _claims = messageBus
-            .Changes(x => x?.User?.Claims, _ => Array.Empty<Claim>(), x => x.Claims)
+            .Changes(x => x?.User?.Claims, _ => Seq<Claim>(), x => x.Claims)
             .Select(MapClaims)
-            .ObserveOn(RxApp.MainThreadScheduler)
+            .ObserveOn(schedulers.MainThreadScheduler)
             .ToProperty(this, x => x.Claims);
     }
 
