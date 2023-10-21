@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenIdConnectClient.Models;
 using OpenIdConnectClient.ViewModels;
+using ReactiveUI;
 using System;
 using System.Threading;
 using TIKSN.DependencyInjection;
@@ -36,6 +37,7 @@ namespace OpenIdConnectClient.Wpf
         {
             services.AddFrameworkCore();
             services.AddSingleton<IBrowser, WpfEmbeddedBrowser>();
+            services.AddSingleton<IScreen>(new MainScreen(new RoutingState()));
 
             services.AddSingleton(new OidcClientOptions()
             {
