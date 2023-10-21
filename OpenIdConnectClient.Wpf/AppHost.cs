@@ -3,11 +3,12 @@ using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenIdConnectClient.Models;
+using OpenIdConnectClient.ViewModels;
+using ReactiveUI;
 using System;
 using System.Threading;
 using TIKSN.DependencyInjection;
-using OpenIdConnectClient.Models;
-using OpenIdConnectClient.ViewModels;
 
 namespace OpenIdConnectClient.Wpf
 {
@@ -34,8 +35,9 @@ namespace OpenIdConnectClient.Wpf
 
         private static void RegisterServices(IServiceCollection services)
         {
-            services.AddFrameworkPlatform();
+            services.AddFrameworkCore();
             services.AddSingleton<IBrowser, WpfEmbeddedBrowser>();
+            services.AddSingleton<IScreen>(new MainScreen(new RoutingState()));
 
             services.AddSingleton(new OidcClientOptions()
             {

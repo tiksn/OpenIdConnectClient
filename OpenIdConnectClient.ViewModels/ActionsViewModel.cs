@@ -6,6 +6,7 @@ using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
 using TIKSN.Time;
+using static LanguageExt.Prelude;
 
 namespace OpenIdConnectClient.ViewModels;
 
@@ -18,7 +19,10 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
         OidcClientOptions oidcClientOptions,
         IBrowser browser,
         ITimeProvider timeProvider,
-        IMessageBus messageBus) : base(messageBus)
+        IMessageBus messageBus,
+        ISchedulers schedulers,
+        IScreen hostScreen)
+        : base(Seq1("Actions"), messageBus, schedulers, hostScreen)
     {
         this.oidcClientOptions = oidcClientOptions ?? throw new ArgumentNullException(nameof(oidcClientOptions));
         this.browser = browser ?? throw new ArgumentNullException(nameof(browser));
@@ -68,11 +72,11 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
         try
         {
             LoginResult loginResult = await _oidcClient.LoginAsync();
-            messageBus.SendMessage(loginResult);
+            MessageBus.SendMessage(loginResult);
         }
         catch (Exception ex)
         {
-            messageBus.SendMessage(new LoginResult()
+            MessageBus.SendMessage(new LoginResult()
             {
                 Error = ex.GetType().FullName,
                 ErrorDescription = ex.Message,
@@ -97,11 +101,11 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
         try
         {
             LogoutResult logoutResult = await _oidcClient.LogoutAsync();
-            messageBus.SendMessage(logoutResult);
+            MessageBus.SendMessage(logoutResult);
         }
         catch (Exception ex)
         {
-            messageBus.SendMessage(new LogoutResult()
+            MessageBus.SendMessage(new LogoutResult()
             {
                 Error = ex.GetType().FullName,
                 ErrorDescription = ex.Message,
@@ -126,17 +130,17 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
         try
         {
             RefreshTokenResult refreshTokenResult = await _oidcClient.RefreshTokenAsync(RefreshToken);
-            messageBus.SendMessage(refreshTokenResult);
+            MessageBus.SendMessage(refreshTokenResult);
 
             if (!string.IsNullOrEmpty(refreshTokenResult.AccessToken))
             {
                 UserInfoResult userInfoResult = await _oidcClient.GetUserInfoAsync(refreshTokenResult.AccessToken);
-                messageBus.SendMessage(userInfoResult);
+                MessageBus.SendMessage(userInfoResult);
             }
         }
         catch (Exception ex)
         {
-            messageBus.SendMessage(new RefreshTokenResult()
+            MessageBus.SendMessage(new RefreshTokenResult()
             {
                 Error = ex.GetType().FullName,
                 ErrorDescription = ex.Message,

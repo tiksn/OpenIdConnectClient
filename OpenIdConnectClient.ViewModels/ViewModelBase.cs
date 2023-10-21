@@ -1,9 +1,4 @@
-﻿// Copyright (c) 2019 .NET Foundation and Contributors. All rights reserved.
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-// See the LICENSE file in the project root for full license information.
-
-using System.Reactive;
+﻿using System.Reactive;
 using OpenIdConnectClient.Models;
 using ReactiveUI;
 
@@ -18,9 +13,14 @@ namespace OpenIdConnectClient.ViewModels
         /// Initializes a new instance of the <see cref="ViewModelBase"/> class.
         /// </summary>
         /// <param name="urlPathSegments">The title of the view model for routing purposes.</param>
+        /// <param name="messageBus"></param>
         /// <param name="schedulers"></param>
         /// <param name="hostScreen">The screen used for routing purposes.</param>
-        protected ViewModelBase(IEnumerable<string> urlPathSegments, ISchedulers schedulers, IScreen hostScreen)
+        protected ViewModelBase(
+            IEnumerable<string> urlPathSegments,
+            IMessageBus messageBus,
+            ISchedulers schedulers,
+            IScreen hostScreen)
         {
             if (urlPathSegments is null)
             {
@@ -39,6 +39,7 @@ namespace OpenIdConnectClient.ViewModels
             }
 
             UrlPathSegment = string.Join('/', urlPathSegments);
+            MessageBus = messageBus ?? throw new ArgumentNullException(nameof(messageBus));
             HostScreen = hostScreen ?? throw new ArgumentNullException(nameof(hostScreen));
 
             ShowAlert = new Interaction<AlertViewModel, Unit>(schedulers.MainThreadScheduler);
@@ -49,6 +50,7 @@ namespace OpenIdConnectClient.ViewModels
         /// Gets the current page path.
         /// </summary>
         public string UrlPathSegment { get; }
+        public IMessageBus MessageBus { get; }
 
         /// <summary>
         /// Gets the screen used for routing operations.

@@ -1,4 +1,6 @@
-﻿using ReactiveUI;
+﻿using OpenIdConnectClient.Models;
+using ReactiveUI;
+using static LanguageExt.Prelude;
 
 namespace OpenIdConnectClient.ViewModels;
 
@@ -8,7 +10,10 @@ public class MainViewModel : ViewModel, IMainViewModel
         IClientOptionsViewModel clientOptions,
         IActionsViewModel actions,
         IResultsViewModel results,
-        IMessageBus messageBus) : base(messageBus)
+        IMessageBus messageBus,
+        ISchedulers schedulers,
+        IScreen hostScreen)
+        : base(Seq1("Main"), messageBus, schedulers, hostScreen)
     {
         ClientOptions = clientOptions ?? throw new ArgumentNullException(nameof(clientOptions));
         Actions = actions ?? throw new ArgumentNullException(nameof(actions));

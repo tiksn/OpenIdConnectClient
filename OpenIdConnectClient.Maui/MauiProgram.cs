@@ -1,10 +1,10 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.OData;
 using OpenIdConnectClient.Models;
 using OpenIdConnectClient.ViewModels;
 using ReactiveUI;
+using Splat.Microsoft.Extensions.DependencyInjection;
 using TIKSN.DependencyInjection;
 
 namespace OpenIdConnectClient.Maui;
@@ -32,6 +32,7 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
+        builder.Services.UseMicrosoftDependencyResolver();
         builder.Services.AddFrameworkPlatform();
         ModelServices.RegisterServices(builder.Services);
         ViewModelServices.RegisterServices(builder.Services);
@@ -39,12 +40,13 @@ public static class MauiProgram
 
         var app = builder.Build();
 
-        app.Services
+        app.Services.UseMicrosoftDependencyResolver();
+
+        _ = app.Services
             .GetRequiredService<IScreen>()
             .Router
             .NavigateAndReset
-            .Execute(app.Services.GetRequiredService<AboutViewModel>())
-            .Subscribe();
+            .Execute(app.Services.GetRequiredService<AboutViewModel>());
 
         return app;
     }
