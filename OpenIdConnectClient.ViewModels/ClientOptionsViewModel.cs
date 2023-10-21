@@ -1,7 +1,9 @@
 ﻿using IdentityModel.OidcClient;
+using OpenIdConnectClient.Models;
 using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
+using static LanguageExt.Prelude;
 
 namespace OpenIdConnectClient.ViewModels;
 
@@ -11,7 +13,10 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
 
     public ClientOptionsViewModel(
         OidcClientOptions oidcClientOptions,
-        IMessageBus messageBus) : base(messageBus)
+        IMessageBus messageBus,
+        ISchedulers schedulers,
+        IScreen hostScreen)
+        : base(Seq1("ClientOptions"), messageBus, schedulers, hostScreen)
     {
         Authority = "http://localhost:9011/";
         Scope = "openid profile email offline_access";
