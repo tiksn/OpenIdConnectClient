@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2088.41" />
     <PackageReference Include="ReactiveUI.WPF" Version="19.5.1" />
-    <PackageReference Include="TIKSN-Framework" Version="4.5.0-alpha.22" />
+    <PackageReference Include="TIKSN-Framework" Version="4.5.0-alpha.23" />
   </ItemGroup>
 
   <ItemGroup>
