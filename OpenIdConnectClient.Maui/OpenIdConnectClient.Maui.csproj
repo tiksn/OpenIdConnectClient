@@ -51,7 +51,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
     <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" Version="14.8.6" />
     <PackageReference Include="System.Net.NameResolution" Version="4.3.0" />
-    <PackageReference Include="TIKSN-Framework" Version="4.5.0-alpha.20" />
+    <PackageReference Include="TIKSN-Framework" Version="4.5.0-alpha.21" />
 	</ItemGroup>
 
 	<ItemGroup>
