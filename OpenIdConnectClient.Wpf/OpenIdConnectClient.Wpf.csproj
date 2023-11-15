@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="IdentityModel.OidcClient" Version="5.2.1" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2151.40" />
     <PackageReference Include="ReactiveUI.WPF" Version="19.5.1" />
     <PackageReference Include="TIKSN-Framework" Version="4.5.0" />
