@@ -18,7 +18,7 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
     public ActionsViewModel(
         OidcClientOptions oidcClientOptions,
         IBrowser browser,
-        ITimeProvider timeProvider,
+        TimeProvider timeProvider,
         IMessageBus messageBus,
         ISchedulers schedulers,
         IScreen hostScreen)
@@ -53,7 +53,7 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
             .Listen<TickModel>()
             .Where(_ => AutoRefresh)
             .Where(_ => !string.IsNullOrEmpty(RefreshToken))
-            .Where(_ => AccessTokenExpiration < timeProvider.GetCurrentTime())
+            .Where(_ => AccessTokenExpiration < timeProvider.GetUtcNow())
             .Select(_ => Observable.FromAsync(async () => await ExecuteRefreshCommandAsync()))
             .Merge()
             .Subscribe();
