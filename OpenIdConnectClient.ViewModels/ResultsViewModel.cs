@@ -13,7 +13,7 @@ namespace OpenIdConnectClient.ViewModels;
 public class ResultsViewModel : ViewModel, IResultsViewModel
 {
     public ResultsViewModel(
-        ITimeProvider timeProvider,
+        TimeProvider timeProvider,
         IMessageBus messageBus,
         ISchedulers schedulers,
         IScreen hostScreen)
@@ -54,7 +54,7 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
             .Select(_ => accessTokenExpirationLastValue);
 
         _accessTokenValidUntil = accessTokenExpirationFromMessageBus.Merge(accessTokenExpirationFromTickModel)
-            .Select(x => x - timeProvider.GetCurrentTime())
+            .Select(x => x - timeProvider.GetUtcNow())
             .Select(x => x >= TimeSpan.Zero
                 ? x.Humanize(1, CultureInfo.CurrentCulture)
                 : "Expired")
