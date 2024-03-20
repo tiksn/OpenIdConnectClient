@@ -1,6 +1,6 @@
-﻿using OpenIdConnectClient.Models;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System.Reactive;
+using TIKSN.Concurrency;
 using static LanguageExt.Prelude;
 
 namespace OpenIdConnectClient.ViewModels
