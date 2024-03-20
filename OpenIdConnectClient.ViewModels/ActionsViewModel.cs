@@ -5,7 +5,7 @@ using OpenIdConnectClient.Models;
 using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
-using TIKSN.Time;
+using TIKSN.Concurrency;
 using static LanguageExt.Prelude;
 
 namespace OpenIdConnectClient.ViewModels;
