@@ -1,6 +1,6 @@
 ﻿using System.Reactive;
-using OpenIdConnectClient.Models;
 using ReactiveUI;
+using TIKSN.Concurrency;
 
 namespace OpenIdConnectClient.ViewModels
 {
@@ -22,21 +22,14 @@ namespace OpenIdConnectClient.ViewModels
             ISchedulers schedulers,
             IScreen hostScreen)
         {
-            if (urlPathSegments is null)
-            {
-                throw new ArgumentNullException(nameof(urlPathSegments));
-            }
+            ArgumentNullException.ThrowIfNull(urlPathSegments);
 
             if (urlPathSegments.IsEmpty())
             {
                 throw new ArgumentOutOfRangeException(nameof(urlPathSegments));
             }
 
-
-            if (schedulers is null)
-            {
-                throw new ArgumentNullException(nameof(schedulers));
-            }
+            ArgumentNullException.ThrowIfNull(schedulers);
 
             UrlPathSegment = string.Join('/', urlPathSegments);
             MessageBus = messageBus ?? throw new ArgumentNullException(nameof(messageBus));

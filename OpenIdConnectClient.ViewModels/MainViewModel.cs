@@ -1,5 +1,5 @@
-﻿using OpenIdConnectClient.Models;
-using ReactiveUI;
+﻿using ReactiveUI;
+using TIKSN.Concurrency;
 using static LanguageExt.Prelude;
 
 namespace OpenIdConnectClient.ViewModels;
@@ -20,9 +20,7 @@ public class MainViewModel : ViewModel, IMainViewModel
         Results = results ?? throw new ArgumentNullException(nameof(results));
     }
 
-    public IClientOptionsViewModel ClientOptions { get; }
-
     public IActionsViewModel Actions { get; }
-
+    public IClientOptionsViewModel ClientOptions { get; }
     public IResultsViewModel Results { get; }
 }

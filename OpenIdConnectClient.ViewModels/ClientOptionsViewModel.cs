@@ -1,8 +1,8 @@
 ﻿using IdentityModel.OidcClient;
-using OpenIdConnectClient.Models;
 using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
+using TIKSN.Concurrency;
 using static LanguageExt.Prelude;
 
 namespace OpenIdConnectClient.ViewModels;
