@@ -7,6 +7,12 @@
       "commands": [
         "snitch"
       ]
+    },
+    "dotnet-outdated-tool": {
+      "version": "4.6.0",
+      "commands": [
+        "dotnet-outdated"
+      ]
     }
   }
 }
