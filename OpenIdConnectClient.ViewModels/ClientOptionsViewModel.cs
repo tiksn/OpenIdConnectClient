@@ -20,7 +20,7 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
     {
         Authority = "http://localhost:9011/";
         Scope = "openid profile email offline_access";
-        RedirectUrl = "http://127.0.0.1/sample-wpf-app";
+        RedirectUrl = "http://127.0.0.1/native-app";
 
         this.oidcClientOptions = oidcClientOptions ?? throw new ArgumentNullException(nameof(oidcClientOptions));
 
