@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Humanizer" />
     <PackageReference Include="IdentityModel.OidcClient" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>
