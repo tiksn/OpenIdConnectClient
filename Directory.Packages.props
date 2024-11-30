@@ -7,15 +7,15 @@
     <PackageVersion Include="Humanizer" Version="2.14.1" />
     <PackageVersion Include="IdentityModel.OidcClient" Version="6.0.0" />
     <PackageVersion Include="MaterialDesignThemes" Version="5.1.0" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
     <PackageVersion Include="Microsoft.Maui.Controls" Version="8.0.91" />
     <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.91" />
     <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.2792.45" />
     <PackageVersion Include="ReactiveUI.WPF" Version="20.1.63" />
     <PackageVersion Include="Splat.Microsoft.Extensions.DependencyInjection" Version="15.2.22" />
     <PackageVersion Include="System.Net.NameResolution" Version="4.3.0" />
-    <PackageVersion Include="TIKSN-Framework" Version="5.3.1" />
+    <PackageVersion Include="TIKSN-Framework" Version="5.4.0" />
   </ItemGroup>
 </Project>
