@@ -6,6 +6,7 @@
 using System.Reactive.Disposables;
 using OpenIdConnectClient.ViewModels;
 using ReactiveUI;
+using System.Reactive.Disposables.Fluent;
 
 namespace OpenIdConnectClient.Maui.Views
 {

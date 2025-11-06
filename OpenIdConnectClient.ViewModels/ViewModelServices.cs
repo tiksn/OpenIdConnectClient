@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ReactiveUI;
 
 namespace OpenIdConnectClient.ViewModels;
 

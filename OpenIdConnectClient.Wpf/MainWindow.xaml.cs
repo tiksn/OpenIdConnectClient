@@ -1,9 +1,9 @@
 ﻿using ReactiveUI;
 using System;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using OpenIdConnectClient.Models;
 using OpenIdConnectClient.ViewModels;
+using System.Reactive.Disposables.Fluent;
 
 namespace OpenIdConnectClient.Wpf
 {

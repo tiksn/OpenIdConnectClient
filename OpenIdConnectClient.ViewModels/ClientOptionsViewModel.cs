@@ -1,4 +1,4 @@
-﻿using IdentityModel.OidcClient;
+﻿using Duende.IdentityModel.OidcClient;
 using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;

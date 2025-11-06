@@ -1,6 +1,6 @@
-﻿using IdentityModel.Client;
-using IdentityModel.OidcClient;
-using IdentityModel.OidcClient.Browser;
+﻿using Duende.IdentityModel.Client;
+using Duende.IdentityModel.OidcClient;
+using Duende.IdentityModel.OidcClient.Browser;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OpenIdConnectClient.Models;
