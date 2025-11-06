@@ -1,6 +1,6 @@
-﻿using IdentityModel.OidcClient;
-using IdentityModel.OidcClient.Browser;
-using IdentityModel.OidcClient.Results;
+﻿using Duende.IdentityModel.OidcClient;
+using Duende.IdentityModel.OidcClient.Browser;
+using Duende.IdentityModel.OidcClient.Results;
 using OpenIdConnectClient.Models;
 using ReactiveUI;
 using System.Reactive;
