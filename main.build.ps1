@@ -20,7 +20,7 @@ task Init {
     New-Item -Path $script:trashFolder -ItemType Directory | Out-Null
     $script:trashFolder = Resolve-Path -Path $script:trashFolder
 
-    $script:solution = Resolve-Path -Path 'OpenIdConnectClient.sln'
+    $script:solution = Resolve-Path -Path 'OpenIdConnectClient.slnx'
 }
 
 # Synopsis: Clean previoud build leftovers
