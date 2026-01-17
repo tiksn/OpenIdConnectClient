@@ -1,19 +1,23 @@
 param(
-    [Parameter(Position = 0)]
-    [string[]]$Tasks
-    ,
+    # Build Version
     [Parameter()]
     [string]
-    $Version
+    $Version,
+    # Build Instance
+    [Parameter()]
+    [string]
+    $Instance
 )
 
 Exit-Build {
-    $script:trashFolder
-    $Script:NextVersion
+    [PSCustomObject]@{
+        TrashFolder = $script:trashFolder
+        NextVersion = $Script:NextVersion
+    }
 }
 
 # Synopsis: Initialize
-task Init {
+Task Init {
     $date = Get-Date -Format 'yyyyMMddHHmmss'
     $trashFolder = Join-Path -Path . -ChildPath '.trash'
     $script:trashFolder = Join-Path -Path $trashFolder -ChildPath $date
@@ -69,6 +73,11 @@ Task EnsureCentralPackageVersions Clean, {
     }
 }
 
+# Synopsis: Format
+Task Format Restore, {
+    Exec { dotnet format $script:solution }
+}
+
 # Synopsis: Restore workloads
 Task RestoreWorkloads Clean, {
     Exec { dotnet workload restore }
@@ -88,7 +97,7 @@ Task RestorePackages Clean, EnsureCentralPackageVersions, {
 Task Restore RestoreWorkloads, RestoreTools, RestorePackages
 
 # Synopsis: Estimate Build Version
-task EstimateVersion Restore, {
+Task EstimateVersion Restore, {
     if ($Version) {
         $Script:NextVersion = $Version
     }
@@ -98,8 +107,14 @@ task EstimateVersion Restore, {
 }
 
 # Synopsis: Build
-task Build EstimateVersion, {
+Task Build EstimateVersion, Format, {
     Exec { dotnet build $script:solution }
 }
 
-task . Build
+# Synopsis: Test
+Task Test Build, {
+    Exec { dotnet test $script:solution }
+}
+
+# Default Task
+Task . Build, Test
