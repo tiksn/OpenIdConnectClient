@@ -12,7 +12,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.2" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.2" />
     <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.31" />
-    <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.30" />
+    <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.31" />
     <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.3595.46" />
     <PackageVersion Include="ReactiveUI.WPF" Version="22.2.1" />
     <PackageVersion Include="Splat.Microsoft.Extensions.DependencyInjection" Version="19.2.1" />
