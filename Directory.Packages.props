@@ -11,7 +11,7 @@
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.3" />
-    <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.31" />
+    <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.40" />
     <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.31" />
     <PackageVersion Include="Microsoft.Web.WebView2" Version="1.0.3595.46" />
     <PackageVersion Include="ReactiveUI.WPF" Version="22.2.1" />
