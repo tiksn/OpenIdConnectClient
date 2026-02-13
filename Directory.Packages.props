@@ -17,6 +17,6 @@
     <PackageVersion Include="ReactiveUI.WPF" Version="22.2.1" />
     <PackageVersion Include="Splat.Microsoft.Extensions.DependencyInjection" Version="19.2.1" />
     <PackageVersion Include="System.Net.NameResolution" Version="4.3.0" />
-    <PackageVersion Include="TIKSN-Framework" Version="5.5.4" />
+    <PackageVersion Include="TIKSN-Framework" Version="5.6.1" />
   </ItemGroup>
 </Project>
