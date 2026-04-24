@@ -50,7 +50,7 @@ jobs:
         shell: pwsh
         run: .\test.ps1 -Instance ${{github.run_id}}
       - name: "Publish Artifacts"
-        uses: actions/upload-artifact@v6.0.0
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: .trash
           path: ".trash"
