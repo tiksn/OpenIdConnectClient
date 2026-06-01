@@ -4,10 +4,11 @@ using ReactiveUI;
 
 namespace OpenIdConnectClient.Maui;
 
-public class ViewServices
+public static class ViewServices
 {
     public static void RegisterServices(IServiceCollection services)
     {
-        services.AddSingleton<IViewFor<AboutViewModel>, AboutView>();
+        services.AddSingleton<MainView>();
+        services.AddSingleton<IViewFor<MainViewModel>>(services => services.GetRequiredService<MainView>());
     }
 }

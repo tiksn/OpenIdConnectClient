@@ -6,10 +6,10 @@ public static class ViewModelServices
 {
     public static void RegisterServices(IServiceCollection services)
     {
-        services.AddSingleton<IMainViewModel, MainViewModel>();
+        services.AddSingleton<MainViewModel>();
+        services.AddSingleton<IMainViewModel>(services => services.GetRequiredService<MainViewModel>());
         services.AddSingleton<IClientOptionsViewModel, ClientOptionsViewModel>();
         services.AddSingleton<IActionsViewModel, ActionsViewModel>();
         services.AddSingleton<IResultsViewModel, ResultsViewModel>();
-        services.AddSingleton<AboutViewModel>();
     }
 }

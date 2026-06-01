@@ -4,5 +4,4 @@
   </Project>
   <Project Path="OpenIdConnectClient.Models/OpenIdConnectClient.Models.csproj" />
   <Project Path="OpenIdConnectClient.ViewModels/OpenIdConnectClient.ViewModels.csproj" />
-  <Project Path="OpenIdConnectClient.Wpf/OpenIdConnectClient.Wpf.csproj" />
 </Solution>

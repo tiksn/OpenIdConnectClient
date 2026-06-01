@@ -10,6 +10,10 @@ public interface IResultsViewModel
 
     public IReadOnlyList<ClaimViewModel> Claims { get; }
 
+    public string Error { get; }
+
+    public string ErrorDescription { get; }
+
     public string IdentityToken { get; }
 
     public string RefreshToken { get; }

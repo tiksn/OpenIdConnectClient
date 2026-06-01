@@ -28,19 +28,19 @@ namespace OpenIdConnectClient.Maui.Views
             {
                 ViewModel
                     .ShowAlert
-                    .RegisterHandler(interaction =>
+                    .RegisterHandler(async interaction =>
                         {
                             AlertViewModel input = interaction.Input;
-                            DisplayAlert(input.Title, input.Description, input.ButtonText);
+                            await DisplayAlertAsync(input.Title, input.Description, input.ButtonText);
                             interaction.SetOutput(Unit.Default);
                         })
                     .DisposeWith(disposables);
 
                 ViewModel
                     .OpenBrowser
-                    .RegisterHandler(interaction =>
+                    .RegisterHandler(async interaction =>
                     {
-                        Launcher.OpenAsync(new Uri(interaction.Input));
+                        await Launcher.OpenAsync(new Uri(interaction.Input));
                         interaction.SetOutput(Unit.Default);
                     })
                     .DisposeWith(disposables);

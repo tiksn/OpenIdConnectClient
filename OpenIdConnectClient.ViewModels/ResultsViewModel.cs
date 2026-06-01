@@ -34,6 +34,16 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
             .ObserveOn(schedulers.MainThreadScheduler)
             .ToProperty(this, x => x.RefreshToken);
 
+        _error = messageBus
+            .Changes(x => x.Error, x => x.Error)
+            .ObserveOn(schedulers.MainThreadScheduler)
+            .ToProperty(this, x => x.Error);
+
+        _errorDescription = messageBus
+            .Changes(x => x.ErrorDescription, x => x.ErrorDescription)
+            .ObserveOn(schedulers.MainThreadScheduler)
+            .ToProperty(this, x => x.ErrorDescription);
+
         var accessTokenExpirationLastValue = DateTimeOffset.MinValue;
 
         var accessTokenExpirationFromMessageBus = messageBus
@@ -101,6 +111,22 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
     public string RefreshToken => _refreshToken.Value;
 
     #endregion Refresh Token property
+
+    #region Error property
+
+    private readonly ObservableAsPropertyHelper<string> _error;
+
+    public string Error => _error.Value;
+
+    #endregion Error property
+
+    #region Error Description property
+
+    private readonly ObservableAsPropertyHelper<string> _errorDescription;
+
+    public string ErrorDescription => _errorDescription.Value;
+
+    #endregion Error Description property
 
     #region Access Token Expiration property
 

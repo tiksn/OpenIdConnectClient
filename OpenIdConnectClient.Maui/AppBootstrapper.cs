@@ -20,21 +20,9 @@ namespace OpenIdConnectClient.Maui
         }
 
         /// <summary>
-        /// Creates the first main page used within the application.
-        /// </summary>
-        /// <returns>The page generated.</returns>
-        public static Page CreateMainPage()
-        {
-            // NB: This returns the opening page that the platform-specific
-            // boilerplate code will look for. It will know to find us because
-            // we've registered our AppBootstrapScreen.
-            return new ReactiveUI.Maui.RoutedViewHost();
-        }
-
-        /// <summary>
         /// The app bootstrap screen is the central location for the RoutingState used for routing between views.
         /// </summary>
-        private class AppBootstrapScreen : ReactiveObject, IScreen
+        private sealed class AppBootstrapScreen : ReactiveObject, IScreen
         {
             /// <summary>
             /// Initializes a new instance of the <see cref="AppBootstrapScreen"/> class.
@@ -44,10 +32,10 @@ namespace OpenIdConnectClient.Maui
                 Router = router;
             }
 
-            /// <summary>
-            /// Gets or sets the router which is used to navigate between views.
-            /// </summary>
-            public RoutingState Router { get; protected set; }
+        /// <summary>
+        /// Gets or sets the router which is used to navigate between views.
+        /// </summary>
+        public RoutingState Router { get; }
         }
     }
 }

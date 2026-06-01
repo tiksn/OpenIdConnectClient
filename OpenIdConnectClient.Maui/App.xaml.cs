@@ -1,23 +1,20 @@
-﻿namespace OpenIdConnectClient.Maui;
+using OpenIdConnectClient.Maui.Views;
+
+namespace OpenIdConnectClient.Maui;
 
 public partial class App : Application
 {
-    public App()
+    private readonly MainView mainView;
+
+    public App(MainView mainView)
     {
+        this.mainView = mainView ?? throw new ArgumentNullException(nameof(mainView));
+
         InitializeComponent();
-
-        MainPage = AppBootstrapper.CreateMainPage();
     }
 
-    protected override void OnStart()
+    protected override Window CreateWindow(IActivationState activationState)
     {
-    }
-
-    protected override void OnSleep()
-    {
-    }
-
-    protected override void OnResume()
-    {
+        return new Window(mainView);
     }
 }
