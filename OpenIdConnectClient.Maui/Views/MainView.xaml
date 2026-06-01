@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:ContentPageBase
+    x:Class="OpenIdConnectClient.Maui.Views.MainView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ui="clr-namespace:OpenIdConnectClient.Maui.Views"
+    xmlns:vms="clr-namespace:OpenIdConnectClient.ViewModels;assembly=OpenIdConnectClient.ViewModels"
+    x:TypeArguments="vms:MainViewModel"
+    Title="OIDC Client">
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="16">
+            <Border Stroke="{AppThemeBinding Light=#ACACAC, Dark=#404040}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Padding="12" Spacing="10">
+                    <Label FontAttributes="Bold" FontSize="18" Text="Settings" />
+
+                    <Grid ColumnDefinitions="140,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" RowSpacing="8">
+                        <Label Grid.Row="0" Grid.Column="0" Text="Authority" VerticalOptions="Center" />
+                        <Entry x:Name="authorityEntry" Grid.Row="0" Grid.Column="1" />
+
+                        <Label Grid.Row="1" Grid.Column="0" Text="Client ID" VerticalOptions="Center" />
+                        <Entry x:Name="clientIdEntry" Grid.Row="1" Grid.Column="1" />
+
+                        <Label Grid.Row="2" Grid.Column="0" Text="Client Secret" VerticalOptions="Center" />
+                        <Entry x:Name="clientSecretEntry" Grid.Row="2" Grid.Column="1" IsPassword="True" />
+
+                        <Label Grid.Row="3" Grid.Column="0" Text="Scope" VerticalOptions="Center" />
+                        <Entry x:Name="scopeEntry" Grid.Row="3" Grid.Column="1" />
+
+                        <Label Grid.Row="4" Grid.Column="0" Text="Redirect URL" VerticalOptions="Center" />
+                        <Entry x:Name="redirectUrlEntry" Grid.Row="4" Grid.Column="1" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="16" RowDefinitions="Auto">
+                <Border Grid.Column="0" Stroke="{AppThemeBinding Light=#ACACAC, Dark=#404040}" StrokeThickness="1">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Padding="12" Spacing="10">
+                        <Label FontAttributes="Bold" Text="Refresh" />
+                        <Button x:Name="refreshButton" Text="Refresh" />
+                        <HorizontalStackLayout Spacing="8">
+                            <Switch x:Name="autoRefreshSwitch" />
+                            <Label Text="Auto Refresh" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="1" Stroke="{AppThemeBinding Light=#ACACAC, Dark=#404040}" StrokeThickness="1">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <VerticalStackLayout Padding="12" Spacing="10">
+                        <Label FontAttributes="Bold" Text="In and Out" />
+                        <Button x:Name="logInButton" Text="Log In" />
+                        <Button x:Name="logOutButton" Text="Log Out" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Border Stroke="{AppThemeBinding Light=#ACACAC, Dark=#404040}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Padding="12" Spacing="10">
+                    <Label FontAttributes="Bold" FontSize="18" Text="Results" />
+
+                    <Label Text="Access Token" />
+                    <Editor x:Name="accessTokenEditor" AutoSize="TextChanges" IsReadOnly="True" MinimumHeightRequest="72" />
+
+                    <Label Text="Identity Token" />
+                    <Editor x:Name="identityTokenEditor" AutoSize="TextChanges" IsReadOnly="True" MinimumHeightRequest="72" />
+
+                    <Label Text="Refresh Token" />
+                    <Editor x:Name="refreshTokenEditor" AutoSize="TextChanges" IsReadOnly="True" MinimumHeightRequest="72" />
+
+                    <Label Text="Error" />
+                    <Entry x:Name="errorEntry" IsReadOnly="True" />
+
+                    <Label Text="Error Description" />
+                    <Editor x:Name="errorDescriptionEditor" AutoSize="TextChanges" IsReadOnly="True" MinimumHeightRequest="48" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Access Token Expiration" />
+                            <Entry x:Name="accessTokenExpirationEntry" IsReadOnly="True" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Valid Until" />
+                            <Entry x:Name="accessTokenValidUntilEntry" IsReadOnly="True" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Stroke="{AppThemeBinding Light=#ACACAC, Dark=#404040}" StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Padding="12" Spacing="10">
+                    <Label FontAttributes="Bold" FontSize="18" Text="Claims" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Padding="0,0,0,4">
+                        <Label FontAttributes="Bold" Text="Type" />
+                        <Label Grid.Column="1" FontAttributes="Bold" Text="Value" />
+                    </Grid>
+                    <CollectionView x:Name="claimsCollectionView" MinimumHeightRequest="220">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="vms:ClaimViewModel">
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Padding="0,6">
+                                    <Label LineBreakMode="TailTruncation" Text="{Binding Type}" />
+                                    <Label Grid.Column="1" LineBreakMode="TailTruncation" Text="{Binding Value}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ui:ContentPageBase>

@@ -27,6 +27,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.19041.0</TargetPlatformMinVersion>
+		<WindowsAppSDKSelfContained Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">true</WindowsAppSDKSelfContained>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
@@ -50,18 +51,11 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
     <PackageReference Include="Splat.Microsoft.Extensions.DependencyInjection" />
-    <PackageReference Include="System.Net.NameResolution" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\OpenIdConnectClient.Models\OpenIdConnectClient.Models.csproj" />
 	  <ProjectReference Include="..\OpenIdConnectClient.ViewModels\OpenIdConnectClient.ViewModels.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-    <Compile Update="Views\AboutView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
 	</ItemGroup>
 
 	<ItemGroup>

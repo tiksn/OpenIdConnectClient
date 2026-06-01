@@ -18,9 +18,11 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
         IScreen hostScreen)
         : base(Seq1("ClientOptions"), messageBus, schedulers, hostScreen)
     {
-        Authority = "http://localhost:9011/";
-        Scope = "openid profile email offline_access";
-        RedirectUrl = "http://127.0.0.1/native-app";
+        Authority = "https://demo.duendesoftware.com";
+        ClientId = "interactive.public";
+        ClientSecret = string.Empty;
+        Scope = "openid profile email offline_access api";
+        RedirectUrl = "oidcc://callback";
 
         this.oidcClientOptions = oidcClientOptions ?? throw new ArgumentNullException(nameof(oidcClientOptions));
 
@@ -61,7 +63,7 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
 
     #region Authority property
 
-    private string _authority;
+    private string _authority = string.Empty;
 
     public string Authority
     {
@@ -73,7 +75,7 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
 
     #region ClientId property
 
-    private string _clientId;
+    private string _clientId = string.Empty;
 
     public string ClientId
     {
@@ -85,7 +87,7 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
 
     #region ClientSecret property
 
-    private string _clientSecret;
+    private string _clientSecret = string.Empty;
 
     public string ClientSecret
     {
@@ -97,7 +99,7 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
 
     #region RedirectUrl property
 
-    private string _redirectUrl;
+    private string _redirectUrl = string.Empty;
 
     public string RedirectUrl
     {
@@ -109,7 +111,7 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
 
     #region Scope property
 
-    private string _scope;
+    private string _scope = string.Empty;
 
     public string Scope
     {
