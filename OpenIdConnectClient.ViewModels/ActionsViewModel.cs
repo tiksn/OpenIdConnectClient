@@ -31,12 +31,12 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
                     .Changes(x => x.RefreshToken, x => x.RefreshToken);
 
         _refreshToken = refreshTokenChanges
-            .ObserveOn(RxApp.MainThreadScheduler)
+            .ObserveOn(schedulers.MainThreadScheduler)
             .ToProperty(this, x => x.RefreshToken);
 
         _accessTokenExpiration = messageBus
             .Changes(x => x.AccessTokenExpiration, x => x.AccessTokenExpiration)
-            .ObserveOn(RxApp.MainThreadScheduler)
+            .ObserveOn(schedulers.MainThreadScheduler)
             .ToProperty(this, x => x.AccessTokenExpiration);
 
         LogInCommand = ReactiveCommand.CreateFromTask(ExecuteLogInCommandAsync);
