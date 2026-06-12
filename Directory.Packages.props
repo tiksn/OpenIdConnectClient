@@ -10,7 +10,7 @@
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.9" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.9" />
     <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.71" />
-    <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.70" />
+    <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.71" />
     <PackageVersion Include="Splat.Microsoft.Extensions.DependencyInjection" Version="20.0.0" />
     <PackageVersion Include="TIKSN-Framework" Version="5.5.4" />
   </ItemGroup>
