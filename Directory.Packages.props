@@ -7,11 +7,11 @@
     <PackageVersion Include="Duende.IdentityModel.OidcClient" Version="7.0.0" />
     <PackageVersion Include="Humanizer" Version="3.0.8" />
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.8" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.8" />
-    <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.70" />
-    <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.70" />
-    <PackageVersion Include="Splat.Microsoft.Extensions.DependencyInjection" Version="19.4.1" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="10.0.10" />
+    <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.80" />
+    <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.80" />
+    <PackageVersion Include="Splat.Microsoft.Extensions.DependencyInjection" Version="20.0.0" />
     <PackageVersion Include="TIKSN-Framework" Version="5.7.0" />
   </ItemGroup>
 </Project>
