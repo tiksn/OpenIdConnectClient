@@ -1,4 +1,5 @@
-﻿using Duende.IdentityModel.OidcClient;
+using RxVoid = ReactiveUI.Primitives.RxVoid;
+using Duende.IdentityModel.OidcClient;
 using Duende.IdentityModel.OidcClient.Browser;
 using Duende.IdentityModel.OidcClient.Results;
 using OpenIdConnectClient.Models;
@@ -20,9 +21,9 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
         IBrowser browser,
         TimeProvider timeProvider,
         IMessageBus messageBus,
-        ISchedulers schedulers,
+        ISequencers sequencers,
         IScreen hostScreen)
-        : base(Seq1("Actions"), messageBus, schedulers, hostScreen)
+        : base(Seq1("Actions"), messageBus, sequencers, hostScreen)
     {
         this.oidcClientOptions = oidcClientOptions ?? throw new ArgumentNullException(nameof(oidcClientOptions));
         this.browser = browser ?? throw new ArgumentNullException(nameof(browser));
@@ -31,12 +32,12 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
                     .Changes(x => x.RefreshToken, x => x.RefreshToken);
 
         _refreshToken = refreshTokenChanges
-            .ObserveOn(RxApp.MainThreadScheduler)
+            .ObserveOn(sequencers.MainThreadSequencer)
             .ToProperty(this, x => x.RefreshToken);
 
         _accessTokenExpiration = messageBus
             .Changes(x => x.AccessTokenExpiration, x => x.AccessTokenExpiration)
-            .ObserveOn(RxApp.MainThreadScheduler)
+            .ObserveOn(sequencers.MainThreadSequencer)
             .ToProperty(this, x => x.AccessTokenExpiration);
 
         LogInCommand = ReactiveCommand.CreateFromTask(ExecuteLogInCommandAsync);
@@ -61,7 +62,7 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
 
     #region Log In Command
 
-    public ReactiveCommand<Unit, Unit> LogInCommand { get; protected set; }
+    public ReactiveCommand<RxVoid, Unit> LogInCommand { get; protected set; }
 
     private async Task<Unit> ExecuteLogInCommandAsync()
     {
@@ -90,7 +91,7 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
 
     #region Log Out Command
 
-    public ReactiveCommand<Unit, Unit> LogOutCommand { get; protected set; }
+    public ReactiveCommand<RxVoid, Unit> LogOutCommand { get; protected set; }
 
     private async Task<Unit> ExecuteLogOutCommandAsync()
     {
@@ -119,7 +120,7 @@ public class ActionsViewModel : ViewModel, IActionsViewModel
 
     #region Refresh Command
 
-    public ReactiveCommand<Unit, Unit> RefreshCommand { get; protected set; }
+    public ReactiveCommand<RxVoid, Unit> RefreshCommand { get; protected set; }
 
     private async Task<Unit> ExecuteRefreshCommandAsync()
     {
