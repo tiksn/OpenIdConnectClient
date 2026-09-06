@@ -19,7 +19,7 @@ public partial class MainView : ContentPageBase<MainViewModel>
         refreshButton.Command = ViewModel.Actions.RefreshCommand;
         logOutButton.Command = ViewModel.Actions.LogOutCommand;
 
-        this.WhenActivated(disposables =>
+        this.WhenActivated((ReactiveUI.Primitives.Disposables.MultipleDisposable disposables) =>
         {
             this.Bind(ViewModel,
                     viewModel => viewModel.ClientOptions.Authority,

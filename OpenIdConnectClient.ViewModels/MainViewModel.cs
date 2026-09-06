@@ -1,4 +1,4 @@
-﻿using ReactiveUI;
+using ReactiveUI;
 using TIKSN.Concurrency;
 using static LanguageExt.Prelude;
 
@@ -11,9 +11,9 @@ public class MainViewModel : ViewModel, IMainViewModel
         IActionsViewModel actions,
         IResultsViewModel results,
         IMessageBus messageBus,
-        ISchedulers schedulers,
+        ISequencers sequencers,
         IScreen hostScreen)
-        : base(Seq1("Main"), messageBus, schedulers, hostScreen)
+        : base(Seq1("Main"), messageBus, sequencers, hostScreen)
     {
         ClientOptions = clientOptions ?? throw new ArgumentNullException(nameof(clientOptions));
         Actions = actions ?? throw new ArgumentNullException(nameof(actions));

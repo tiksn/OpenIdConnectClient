@@ -1,4 +1,4 @@
-﻿using Humanizer;
+using Humanizer;
 using LanguageExt;
 using OpenIdConnectClient.Models;
 using ReactiveUI;
@@ -15,33 +15,33 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
     public ResultsViewModel(
         TimeProvider timeProvider,
         IMessageBus messageBus,
-        ISchedulers schedulers,
+        ISequencers sequencers,
         IScreen hostScreen)
-        : base(Seq1("Results"), messageBus, schedulers, hostScreen)
+        : base(Seq1("Results"), messageBus, sequencers, hostScreen)
     {
         _accessToken = messageBus
             .Changes(x => x.AccessToken, x => x.AccessToken)
-            .ObserveOn(schedulers.MainThreadScheduler)
+            .ObserveOn(sequencers.MainThreadSequencer)
             .ToProperty(this, x => x.AccessToken);
 
         _identityToken = messageBus
             .Changes(x => x.IdentityToken, x => x.IdentityToken)
-            .ObserveOn(schedulers.MainThreadScheduler)
+            .ObserveOn(sequencers.MainThreadSequencer)
             .ToProperty(this, x => x.IdentityToken);
 
         _refreshToken = messageBus
             .Changes(x => x.RefreshToken, x => x.RefreshToken)
-            .ObserveOn(schedulers.MainThreadScheduler)
+            .ObserveOn(sequencers.MainThreadSequencer)
             .ToProperty(this, x => x.RefreshToken);
 
         _error = messageBus
             .Changes(x => x.Error, x => x.Error)
-            .ObserveOn(schedulers.MainThreadScheduler)
+            .ObserveOn(sequencers.MainThreadSequencer)
             .ToProperty(this, x => x.Error);
 
         _errorDescription = messageBus
             .Changes(x => x.ErrorDescription, x => x.ErrorDescription)
-            .ObserveOn(schedulers.MainThreadScheduler)
+            .ObserveOn(sequencers.MainThreadSequencer)
             .ToProperty(this, x => x.ErrorDescription);
 
         var accessTokenExpirationLastValue = DateTimeOffset.MinValue;
@@ -55,7 +55,7 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
                 accessTokenExpirationLastValue = x;
             })
             .Select(x => x.ToString("F", CultureInfo.CurrentCulture))
-            .ObserveOn(schedulers.MainThreadScheduler)
+            .ObserveOn(sequencers.MainThreadSequencer)
             .ToProperty(this, x => x.AccessTokenExpiration);
 
         var accessTokenExpirationFromTickModel = messageBus
@@ -69,13 +69,13 @@ public class ResultsViewModel : ViewModel, IResultsViewModel
                 ? x.Humanize(1, CultureInfo.CurrentCulture)
                 : "Expired")
             .DistinctUntilChanged()
-            .ObserveOn(schedulers.MainThreadScheduler)
+            .ObserveOn(sequencers.MainThreadSequencer)
             .ToProperty(this, x => x.AccessTokenValidUntil);
 
         _claims = messageBus
             .Changes(x => x?.User?.Claims, _ => Seq<Claim>(), x => x.Claims)
             .Select(MapClaims)
-            .ObserveOn(schedulers.MainThreadScheduler)
+            .ObserveOn(sequencers.MainThreadSequencer)
             .ToProperty(this, x => x.Claims);
     }
 

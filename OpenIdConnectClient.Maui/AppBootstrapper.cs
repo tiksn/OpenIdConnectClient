@@ -32,10 +32,10 @@ namespace OpenIdConnectClient.Maui
                 Router = router;
             }
 
-        /// <summary>
-        /// Gets or sets the router which is used to navigate between views.
-        /// </summary>
-        public RoutingState Router { get; }
+            /// <summary>
+            /// Gets or sets the router which is used to navigate between views.
+            /// </summary>
+            public RoutingState Router { get; }
         }
     }
 }

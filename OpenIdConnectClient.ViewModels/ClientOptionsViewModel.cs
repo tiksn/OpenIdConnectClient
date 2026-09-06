@@ -1,4 +1,4 @@
-﻿using Duende.IdentityModel.OidcClient;
+using Duende.IdentityModel.OidcClient;
 using ReactiveUI;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -14,9 +14,9 @@ public class ClientOptionsViewModel : ViewModel, IClientOptionsViewModel
     public ClientOptionsViewModel(
         OidcClientOptions oidcClientOptions,
         IMessageBus messageBus,
-        ISchedulers schedulers,
+        ISequencers sequencers,
         IScreen hostScreen)
-        : base(Seq1("ClientOptions"), messageBus, schedulers, hostScreen)
+        : base(Seq1("ClientOptions"), messageBus, sequencers, hostScreen)
     {
         Authority = "https://demo.duendesoftware.com";
         ClientId = "interactive.public";

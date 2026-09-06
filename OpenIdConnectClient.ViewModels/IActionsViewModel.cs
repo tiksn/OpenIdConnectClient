@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+using RxVoid = ReactiveUI.Primitives.RxVoid;
+using ReactiveUI;
 using System.Reactive;
 
 namespace OpenIdConnectClient.ViewModels;
@@ -7,9 +8,9 @@ public interface IActionsViewModel
 {
     public bool AutoRefresh { get; set; }
 
-    ReactiveCommand<Unit, Unit> LogInCommand { get; }
+    ReactiveCommand<RxVoid, Unit> LogInCommand { get; }
 
-    ReactiveCommand<Unit, Unit> LogOutCommand { get; }
+    ReactiveCommand<RxVoid, Unit> LogOutCommand { get; }
 
-    ReactiveCommand<Unit, Unit> RefreshCommand { get; }
+    ReactiveCommand<RxVoid, Unit> RefreshCommand { get; }
 }

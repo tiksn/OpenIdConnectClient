@@ -1,4 +1,4 @@
-﻿using System.Reactive;
+using System.Reactive;
 using ReactiveUI;
 using TIKSN.Concurrency;
 
@@ -14,12 +14,12 @@ namespace OpenIdConnectClient.ViewModels
         /// </summary>
         /// <param name="urlPathSegments">The title of the view model for routing purposes.</param>
         /// <param name="messageBus"></param>
-        /// <param name="schedulers"></param>
+        /// <param name="sequencers"></param>
         /// <param name="hostScreen">The screen used for routing purposes.</param>
         protected ViewModelBase(
             IEnumerable<string> urlPathSegments,
             IMessageBus messageBus,
-            ISchedulers schedulers,
+            ISequencers sequencers,
             IScreen hostScreen)
         {
             ArgumentNullException.ThrowIfNull(urlPathSegments);
@@ -29,14 +29,14 @@ namespace OpenIdConnectClient.ViewModels
                 throw new ArgumentOutOfRangeException(nameof(urlPathSegments));
             }
 
-            ArgumentNullException.ThrowIfNull(schedulers);
+            ArgumentNullException.ThrowIfNull(sequencers);
 
             UrlPathSegment = string.Join('/', urlPathSegments);
             MessageBus = messageBus ?? throw new ArgumentNullException(nameof(messageBus));
             HostScreen = hostScreen ?? throw new ArgumentNullException(nameof(hostScreen));
 
-            ShowAlert = new Interaction<AlertViewModel, Unit>(schedulers.MainThreadScheduler);
-            OpenBrowser = new Interaction<string, Unit>(schedulers.MainThreadScheduler);
+            ShowAlert = new Interaction<AlertViewModel, Unit>(sequencers.MainThreadSequencer);
+            OpenBrowser = new Interaction<string, Unit>(sequencers.MainThreadSequencer);
         }
 
         /// <summary>
