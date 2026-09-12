@@ -12,6 +12,6 @@
     <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.101" />
     <PackageVersion Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.101" />
     <PackageVersion Include="Splat.Microsoft.Extensions.DependencyInjection" Version="21.0.0" />
-    <PackageVersion Include="TIKSN-Framework" Version="5.8.0" />
+    <PackageVersion Include="TIKSN-Framework" Version="5.8.1" />
   </ItemGroup>
 </Project>
