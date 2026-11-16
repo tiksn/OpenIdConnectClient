@@ -64,15 +64,15 @@ notes that `WebAuthenticator` is not working on Windows.
 Build the Windows MAUI target:
 
 ```powershell
-dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net10.0-windows10.0.19041.0
+dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net11.0-windows10.0.19041.0
 ```
 
 Build the other MAUI targets:
 
 ```powershell
-dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net10.0-android
-dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net10.0-ios
-dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net10.0-maccatalyst
+dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net11.0-android
+dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net11.0-ios
+dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net11.0-maccatalyst
 ```
 
 ## Run On Windows
@@ -80,8 +80,8 @@ dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net10.0
 Build first, then launch the generated executable:
 
 ```powershell
-dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net10.0-windows10.0.19041.0
-.\OpenIdConnectClient.Maui\bin\Debug\net10.0-windows10.0.19041.0\win-x64\OpenIdConnectClient.Maui.exe
+dotnet build OpenIdConnectClient.Maui\OpenIdConnectClient.Maui.csproj -f net11.0-windows10.0.19041.0
+.\OpenIdConnectClient.Maui\bin\Debug\net11.0-windows10.0.19041.0\win-x64\OpenIdConnectClient.Maui.exe
 ```
 
 The Windows target is configured with `WindowsAppSDKSelfContained=true` so the
